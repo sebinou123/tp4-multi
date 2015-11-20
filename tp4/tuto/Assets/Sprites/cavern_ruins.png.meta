@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 61e9e1cea3e201543853b953e0204792
-timeCreated: 1447437949
+timeCreated: 1447974397
 licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
@@ -28,6 +28,7 @@ TextureImporter:
     21300042: cavern_ruins_21
     21300044: cavern_ruins_22
     21300046: cavern_ruins_23
+    21300048: cavern_ruins_24
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -311,6 +312,16 @@ TextureImporter:
         y: 224
         width: 28
         height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cavern_ruins_24
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 289
+        width: 34
+        height: 65
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}

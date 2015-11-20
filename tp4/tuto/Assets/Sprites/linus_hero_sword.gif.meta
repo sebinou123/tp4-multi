@@ -1,0 +1,573 @@
+fileFormatVersion: 2
+guid: 8beda3683ab5be34c8d9c6e4eb5dc347
+timeCreated: 1447977362
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: linus_hero_sword_0
+    21300002: linus_hero_sword_1
+    21300004: linus_hero_sword_2
+    21300006: linus_hero_sword_3
+    21300008: linus_hero_sword_4
+    21300010: linus_hero_sword_5
+    21300012: linus_hero_sword_6
+    21300014: linus_hero_sword_7
+    21300016: linus_hero_sword_8
+    21300018: linus_hero_sword_9
+    21300020: linus_hero_sword_10
+    21300022: linus_hero_sword_11
+    21300024: linus_hero_sword_12
+    21300026: linus_hero_sword_13
+    21300028: linus_hero_sword_14
+    21300030: linus_hero_sword_15
+    21300032: linus_hero_sword_16
+    21300034: linus_hero_sword_17
+    21300036: linus_hero_sword_18
+    21300038: linus_hero_sword_19
+    21300040: linus_hero_sword_20
+    21300042: linus_hero_sword_21
+    21300044: linus_hero_sword_22
+    21300046: linus_hero_sword_23
+    21300048: linus_hero_sword_24
+    21300050: linus_hero_sword_25
+    21300052: linus_hero_sword_26
+    21300054: linus_hero_sword_27
+    21300056: linus_hero_sword_28
+    21300058: linus_hero_sword_29
+    21300060: linus_hero_sword_30
+    21300062: linus_hero_sword_31
+    21300064: linus_hero_sword_32
+    21300066: linus_hero_sword_33
+    21300068: linus_hero_sword_34
+    21300070: linus_hero_sword_35
+    21300072: linus_hero_sword_36
+    21300074: linus_hero_sword_37
+    21300076: linus_hero_sword_38
+    21300078: linus_hero_sword_39
+    21300080: linus_hero_sword_40
+    21300082: linus_hero_sword_41
+    21300084: linus_hero_sword_42
+    21300086: linus_hero_sword_43
+    21300088: linus_hero_sword_44
+    21300090: linus_hero_sword_45
+    21300092: linus_hero_sword_46
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: linus_hero_sword_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 355
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_1
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 355
+        width: 27
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_2
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 353
+        width: 27
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_3
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 353
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_4
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 341
+        width: 61
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_5
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 340
+        width: 61
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_6
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 339
+        width: 61
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_7
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 337
+        width: 61
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_8
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 338
+        width: 62
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_9
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 294
+        width: 58
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 292
+        width: 56
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_11
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 283
+        width: 55
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_12
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 282
+        width: 95
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_13
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 290
+        width: 66
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_14
+      rect:
+        serializedVersion: 2
+        x: 385
+        y: 285
+        width: 61
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_15
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 250
+        width: 58
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_16
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 246
+        width: 57
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_17
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 244
+        width: 56
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_18
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 243
+        width: 48
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_19
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 243
+        width: 49
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_20
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 219
+        width: 42
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_21
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 224
+        width: 39
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_22
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 221
+        width: 35
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_23
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 224
+        width: 40
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_24
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 199
+        width: 28
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_25
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 197
+        width: 24
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_26
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 199
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_27
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 197
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_28
+      rect:
+        serializedVersion: 2
+        x: 158
+        y: 198
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_29
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 199
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_30
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 199
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_31
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 200
+        width: 32
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_32
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 168
+        width: 38
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_33
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 170
+        width: 40
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_34
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 169
+        width: 36
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_35
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 164
+        width: 42
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_36
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 144
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_37
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 144
+        width: 34
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_38
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 142
+        width: 30
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_39
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 139
+        width: 30
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_40
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 138
+        width: 25
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_41
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 138
+        width: 30
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_42
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 139
+        width: 32
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_43
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 134
+        width: 32
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_44
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 123
+        width: 27
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_45
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 124
+        width: 27
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: linus_hero_sword_46
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 132
+        width: 20
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
