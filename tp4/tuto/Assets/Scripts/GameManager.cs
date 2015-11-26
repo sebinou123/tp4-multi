@@ -10,12 +10,19 @@ using System.Collections;
 		public float levelStartDelay = 2f;						//Time to wait before starting level, in seconds.
 		public float turnDelay = 0.1f;							//Delay between each Player turn.
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
-		
-		
-		private Text levelText;									//Text to display current level number.
-		private GameObject levelImage;							//Image to block out level as levels are being set up, background for levelText.
-		private BoardManager boardScript;						//Store a reference to our BoardManager which will set up the level.
-		private int level = 1;									//Current level number, expressed in game as "Day 1".
+
+
+        public Text levelText;									//Text to display current level number.
+        public GameObject levelImage;							//Image to block out level as levels are being set up, background for levelText.
+        public Text TextName;
+        public Text TextStats;
+        public Text TextArmor;
+        public Text TextLevel;
+        public Text TextWeapon;
+        public GameObject[] weaponRange;
+        public GameObject ImageWeapon;
+        private BoardManager boardScript;						//Store a reference to our BoardManager which will set up the level.
+		public int level = 1;									//Current level number, expressed in game as "Day 1".
 		private List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
@@ -61,7 +68,13 @@ using System.Collections;
 		
 		//Initializes the game for each level.
 		void InitGame()
-		{
+		{ /*private Text TextName;
+        private Text TextStats;
+        private Text TextArmor;
+        private Text TextLevel;
+        private Text TextWeapon;
+        private GameObject[] weaponRange;
+        private GameObject ImageWeapon;*/
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 			
@@ -70,9 +83,22 @@ using System.Collections;
 			
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
-			
-			//Set the text of levelText to the string "Day" and append the current level number.
-			levelText.text = "Day " + level;
+
+            TextName = GameObject.Find("TextName").GetComponent<Text>();
+            TextStats = GameObject.Find("TextStats").GetComponent<Text>();
+            TextArmor = GameObject.Find("TextArmor").GetComponent<Text>();
+            TextLevel = GameObject.Find("TextLevel").GetComponent<Text>();
+            TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
+            ImageWeapon = GameObject.Find("TextStats");
+
+            weaponRange = new GameObject[25];
+            for (int i = 0; i < weaponRange.Length; i++)
+            {
+                weaponRange[i] = GameObject.Find("Image (" + i + ")");
+            }
+
+            //Set the text of levelText to the string "Day" and append the current level number.
+            levelText.text = "Day " + level;
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			levelImage.SetActive(true);

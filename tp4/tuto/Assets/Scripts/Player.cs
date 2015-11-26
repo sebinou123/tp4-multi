@@ -9,18 +9,15 @@ using UnityEngine.UI;	//Allows us to use UI.
 		public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
 		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
-		public AudioClip eatSound1;					//1 of 2 Audio clips to play when player collects a food object.
-		public AudioClip eatSound2;					//2 of 2 Audio clips to play when player collects a food object.
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
         public Text foodText;
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
-		private Vector2 touchOrigin = -Vector2.one;	//Used to store location of screen touch origin for mobile controls.
 
         public int level = 5;
         public int hp = 250;
         public int maxHp = 300;
-        public Weapon weapon = new SwordOfTruth(15);
+        public WeaponManager weaponManager;
         public int weaponLevel = 1;
 		
 		//Start overrides the Start function of MovingObject
@@ -31,6 +28,12 @@ using UnityEngine.UI;	//Allows us to use UI.
 			
 			//Call the Start function of the MovingObject base class.
 			base.Start ();
+
+            weaponManager = new WeaponManager();
+            GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
+            GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
+
+            //GameManager.instance.TextWeapon.color = weaponManager.getCurrentWeapon().getWeaponRarity().color;
 		}
 		
 		private void Update ()
@@ -69,7 +72,15 @@ using UnityEngine.UI;	//Allows us to use UI.
 
         private void swapWeapon(bool positiveSwap)
         {
-
+            if (positiveSwap) { 
+                weaponManager.nextAvailable(true);
+            }
+            else
+            {
+                weaponManager.previousAvailable(true);
+            }
+            GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
+            GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
         }
 		
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject
