@@ -1,0 +1,23 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BasicSword : Weapon {
+    private static int[] weaponRange = { 
+                                 0, 0, 0, 0, 0,
+                                 0, 0, 1, 0, 0,
+                                 0, 0, 1, 0, 0,
+                                 0, 0, 0, 0, 0,
+                                 0, 0, 0, 0, 0};
+    private const float damageFactor = 1f;
+    private const Weapon.WeaponRarity weaponRarity = Weapon.WeaponRarity.Common;
+    private const string weaponName = "Basic Sword";
+
+    public BasicSword(int weaponLevel)
+    {
+        setWeaponDamage(weaponLevel * damageFactor);
+        setWeaponLevel(weaponLevel);
+        setWeaponName(weaponName);
+        setWeaponDamageFactor(damageFactor);
+        setWeaponRange(weaponRange);
+    }
+}

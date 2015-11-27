@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WeaponManager
 {
-    public static int WEAPONS_AVAILABLE = 1;
+    public static int WEAPONS_AVAILABLE = 3;
     public static Weapon[] weaponsAvailable;
     private Weapon currentWeapon;
     private int weaponIndex;
@@ -12,7 +12,9 @@ public class WeaponManager
     {
         weaponsAvailable = new Weapon[WeaponManager.WEAPONS_AVAILABLE];
 
-        weaponsAvailable[0] = new SwordOfTruth(15);
+        weaponsAvailable[0] = new BasicSword(1);
+        weaponsAvailable[1] = new SwordOfTruth(1);
+        weaponsAvailable[2] = new KnightSword(1);
         weaponIndex = 0;
         currentWeapon = weaponsAvailable[weaponIndex];
     }
@@ -22,7 +24,9 @@ public class WeaponManager
     {
         weaponsAvailable = new Weapon[WeaponManager.WEAPONS_AVAILABLE];
 
-        weaponsAvailable[0] = new SwordOfTruth(weaponsLevels[0]);
+        weaponsAvailable[0] = new BasicSword(weaponsLevels[0]);
+        weaponsAvailable[1] = new SwordOfTruth(weaponsLevels[1]);
+        weaponsAvailable[2] = new KnightSword(weaponsLevels[2]);
         weaponIndex = equippedWeapon;
         currentWeapon = weaponsAvailable[weaponIndex];
     }
@@ -40,9 +44,9 @@ public class WeaponManager
 
         do
         {
-            nextAvail = nextAvail + 1 == WeaponManager.WEAPONS_AVAILABLE ? 0 : nextAvail++;
+            nextAvail = nextAvail + 1 == WeaponManager.WEAPONS_AVAILABLE ? 0 : ++nextAvail;
             returnWeapon = weaponsAvailable[nextAvail];
-        } while (weaponsAvailable[nextAvail].getWeaponLevel() != 0);
+        } while (weaponsAvailable[nextAvail].getWeaponLevel() == 0);
 
         if (switchWeapon)
         {
@@ -60,9 +64,9 @@ public class WeaponManager
 
         do
         {
-            prevAvail = prevAvail - 1 < 0 ? WeaponManager.WEAPONS_AVAILABLE - 1 : prevAvail--;
+            prevAvail = prevAvail - 1 < 0 ? WeaponManager.WEAPONS_AVAILABLE - 1 : --prevAvail;
             returnWeapon = weaponsAvailable[prevAvail];
-        } while (weaponsAvailable[prevAvail].getWeaponLevel() != 0);
+        } while (weaponsAvailable[prevAvail].getWeaponLevel() == 0);
 
         if (switchWeapon)
         {
@@ -70,6 +74,11 @@ public class WeaponManager
             currentWeapon = weaponsAvailable[weaponIndex];
         }
         return returnWeapon;
+    }
+
+    public int getCurrentWeaponIndex()
+    {
+        return this.weaponIndex;
     }
 	
 }

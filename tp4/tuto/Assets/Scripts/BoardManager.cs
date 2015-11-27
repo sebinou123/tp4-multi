@@ -150,7 +150,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 			
 			//Instantiate the exit tile in the upper right hand corner of our game board
-			Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+			Instantiate (exit, new Vector3 (5, 5, 0f), Quaternion.identity);
 		}
 	}
 

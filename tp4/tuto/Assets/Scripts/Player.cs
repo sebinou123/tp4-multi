@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;	//Allows us to use UI.
+using UnityEngine.UI;
+using System;
+using System.Threading;
+using UnityEditor.VersionControl;	//Allows us to use UI.
 
 
 	//Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
@@ -19,6 +22,8 @@ using UnityEngine.UI;	//Allows us to use UI.
         public int maxHp = 300;
         public WeaponManager weaponManager;
         public int weaponLevel = 1;
+
+        private bool weaponBeingSwapped = false;
 		
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()
@@ -32,17 +37,25 @@ using UnityEngine.UI;	//Allows us to use UI.
             weaponManager = new WeaponManager();
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
+            GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
+            updateWeaponRange();
+
+
 
             //GameManager.instance.TextWeapon.color = weaponManager.getCurrentWeapon().getWeaponRarity().color;
 		}
 		
 		private void Update ()
 		{
-            if (Input.GetKey(KeyCode.Q))
+            if (!weaponBeingSwapped && Input.GetKey(KeyCode.Q))
             {
-                swapWeapon(false);
-            } else if (Input.GetKey(KeyCode.E)){
-                swapWeapon(true);
+                weaponBeingSwapped = true;
+                StartCoroutine(swapWeapon(false));
+            }
+            else if (!weaponBeingSwapped && Input.GetKey(KeyCode.E))
+            {
+                weaponBeingSwapped = true;
+                StartCoroutine(swapWeapon(true));
             }else if (!base.moving)
             {
                 int horizontal = 0;  	//Used to store the horizontal move direction.
@@ -70,7 +83,7 @@ using UnityEngine.UI;	//Allows us to use UI.
             }
 		}
 
-        private void swapWeapon(bool positiveSwap)
+        IEnumerator swapWeapon(bool positiveSwap)
         {
             if (positiveSwap) { 
                 weaponManager.nextAvailable(true);
@@ -81,8 +94,27 @@ using UnityEngine.UI;	//Allows us to use UI.
             }
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
+			GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
+            updateWeaponRange();
+            yield return new WaitForSeconds(0.1f);
+            weaponBeingSwapped = false;
         }
-		
+
+        private void updateWeaponRange()
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                if(weaponManager.getCurrentWeapon().getWeaponRange()[i] == 1)
+                {
+                    GameManager.instance.weaponRange[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/attackRange");
+                }
+                else
+                {
+                    GameManager.instance.weaponRange[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/noAttackRange");
+                }
+            }
+        }
+
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject
 		//AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
 		protected override void AttemptMove <T> (int xDir, int yDir)

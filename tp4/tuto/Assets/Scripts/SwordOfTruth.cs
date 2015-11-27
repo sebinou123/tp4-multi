@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using UnityEngine;
+
 
 public class SwordOfTruth : Weapon {
     private static int[] weaponRange = { 
@@ -9,7 +11,6 @@ public class SwordOfTruth : Weapon {
                                  0, 0, 0, 0, 0};
     private const float damageFactor = 2.5f;
     private const Weapon.WeaponRarity weaponRarity = Weapon.WeaponRarity.Unique;
-    private const string imageName = "imgSwordOfTruth";
     private const string weaponName = "Sword of Truth";
 
     public SwordOfTruth(int weaponLevel)

@@ -2,14 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player.cs">
     <Files>
-      <File FileName="Assets\Scripts\Warrior.cs" Line="3" Column="1" />
-      <File FileName="Assets\Scripts\Wizard.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Player.cs" Line="164" Column="1" />
-      <File FileName="Assets\Scripts\Wall.cs" Line="42" Column="1" />
-      <File FileName="Assets\Scripts\GameManager.cs" Line="159" Column="1" />
-      <File FileName="Assets\Scripts\BoardManager.cs" Line="155" Column="1" />
-      <File FileName="Assets\Scripts\Loader.cs" Line="26" Column="1" />
-      <File FileName="Assets\Scripts\MovingObject.cs" Line="125" Column="1" />
+      <File FileName="Assets\Scripts\GameManager.cs" Line="34" Column="57" />
+      <File FileName="Assets\Scripts\Player.cs" Line="35" Column="18" />
+      <File FileName="Assets\Scripts\btnStartGame.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\SmoothCamera2D.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\BoardManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\btnCreateHero.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\RadioButton.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

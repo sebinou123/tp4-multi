@@ -10,17 +10,23 @@ using System.Collections;
 		public float levelStartDelay = 2f;						//Time to wait before starting level, in seconds.
 		public float turnDelay = 0.1f;							//Delay between each Player turn.
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
-
-
+		public Sprite[] items = new Sprite[10];
+	
+		public bool firtTimeLoad = true;
+	    public GameObject player;
         public Text levelText;									//Text to display current level number.
         public GameObject levelImage;							//Image to block out level as levels are being set up, background for levelText.
+		public GameObject levelBackGround;
+		public GameObject menuprincipal;	
+		public GameObject infoplayer;	
+		public GameObject createplayer;
         public Text TextName;
         public Text TextStats;
         public Text TextArmor;
         public Text TextLevel;
         public Text TextWeapon;
         public GameObject[] weaponRange;
-        public GameObject ImageWeapon;
+        public Image ImageWeapon;
         private BoardManager boardScript;						//Store a reference to our BoardManager which will set up the level.
 		public int level = 1;									//Current level number, expressed in game as "Day 1".
 		private List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
@@ -30,7 +36,7 @@ using System.Collections;
 		
 		
 		//Awake is always called before any Start functions
-		void Awake()
+		public void Awake()
 		{
 			//Check if instance already exists
 			if (instance == null)
@@ -52,11 +58,18 @@ using System.Collections;
 			
 			//Get a component reference to the attached BoardManager script
 			boardScript = GetComponent<BoardManager>();
-			
+	
 			//Call the InitGame function to initialize the first level 
+		if (firtTimeLoad == false) {
 			InitGame();
 		}
-		
+
+		if (firtTimeLoad == true) {
+			menuprincipal = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasMenuPrincipal")); 
+			menuprincipal.SetActive (true);
+			firtTimeLoad = false;
+		}
+	}
 		//This is called each time a scene is loaded.
 		void OnLevelWasLoaded(int index)
 		{
@@ -67,7 +80,7 @@ using System.Collections;
 		}
 		
 		//Initializes the game for each level.
-		void InitGame()
+		public void InitGame()
 		{ /*private Text TextName;
         private Text TextStats;
         private Text TextArmor;
@@ -79,17 +92,15 @@ using System.Collections;
 			doingSetup = true;
 			
 			//Get a reference to our image LevelImage by finding it by name.
-			levelImage = GameObject.Find("LevelImage");
+			levelImage = (GameObject)Instantiate(Resources.Load("Prefabs/Canvas"));
+			levelImage.name = "Canvas";
+			infoplayer = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasInfoPlayer")); 
+
 			
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
-            TextName = GameObject.Find("TextName").GetComponent<Text>();
-            TextStats = GameObject.Find("TextStats").GetComponent<Text>();
-            TextArmor = GameObject.Find("TextArmor").GetComponent<Text>();
-            TextLevel = GameObject.Find("TextLevel").GetComponent<Text>();
-            TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
-            ImageWeapon = GameObject.Find("TextStats");
+           
 
             weaponRange = new GameObject[25];
             for (int i = 0; i < weaponRange.Length; i++)
@@ -102,9 +113,26 @@ using System.Collections;
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			levelImage.SetActive(true);
-			
 			//Call the HideLevelImage function with a delay in seconds of levelStartDelay.
 			Invoke("HideLevelImage", levelStartDelay);
+			infoplayer.SetActive (true);
+
+
+			TextName = GameObject.Find("TextName").GetComponent<Text>();
+			TextStats = GameObject.Find("TextStats").GetComponent<Text>();
+			TextArmor = GameObject.Find("TextArmor").GetComponent<Text>();
+			TextLevel = GameObject.Find("TextLevel").GetComponent<Text>();
+			TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
+			ImageWeapon = GameObject.Find("ImageWeapon").GetComponent<Image>();
+
+			weaponRange = new GameObject[25];
+			for (int i = 0; i < weaponRange.Length; i++)
+			{
+				weaponRange[i] = GameObject.Find("Image (" + i + ")");
+			}
+
+		 	player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"));
+			player.name = "Player";
 			
 			//Clear any Enemy objects in our List to prepare for next level.
 			enemies.Clear();
@@ -118,9 +146,9 @@ using System.Collections;
 		//Hides black image used between levels
 		void HideLevelImage()
 		{
+			levelBackGround = GameObject.Find ("LevelImage");
 			//Disable the levelImage gameObject.
-			levelImage.SetActive(false);
-			
+			levelBackGround.SetActive (false);
 			//Set doingSetup to false allowing player to move again.
 			doingSetup = false;
 		}
