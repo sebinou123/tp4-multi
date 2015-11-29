@@ -11,7 +11,8 @@ using System.Collections;
 		public float turnDelay = 0.1f;							//Delay between each Player turn.
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		public Sprite[] items = new Sprite[10];
-	
+
+		public SmoothCamera2D camera;
 		public bool firtTimeLoad = true;
 	    public GameObject player;
         public Text levelText;									//Text to display current level number.
@@ -133,6 +134,8 @@ using System.Collections;
 
 		 	player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"));
 			player.name = "Player";
+			camera = GameObject.Find ("Main Camera").GetComponent<SmoothCamera2D>();
+			camera.target = player.transform;
 			
 			//Clear any Enemy objects in our List to prepare for next level.
 			enemies.Clear();

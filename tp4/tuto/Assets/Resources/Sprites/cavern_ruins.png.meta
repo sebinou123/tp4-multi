@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 61e9e1cea3e201543853b953e0204792
-timeCreated: 1447974397
-licenseType: Pro
+timeCreated: 1448827451
+licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
     21300000: cavern_ruins_0
@@ -9,7 +9,7 @@ TextureImporter:
     21300004: cavern_ruins_2
     21300006: cavern_ruins_3
     21300008: cavern_ruins_4
-    21300010: cavern_ruins_5
+    21300010: cavernfloor
     21300012: cavern_ruins_6
     21300014: cavern_ruins_7
     21300016: cavern_ruins_8
@@ -125,13 +125,13 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: cavern_ruins_5
+    - name: cavernfloor
       rect:
         serializedVersion: 2
         x: 0
-        y: 480
+        y: 478
         width: 34
-        height: 32
+        height: 34
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
