@@ -20,10 +20,12 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         public int level = 5;
         public int hp = 250;
         public int maxHp = 300;
+        public int experience;
         public WeaponManager weaponManager;
         public int weaponLevel = 1;
 
         private bool weaponBeingSwapped = false;
+        private FacingDirection facing = FacingDirection.Up;                     
 		
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()
@@ -40,8 +42,6 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
             updateWeaponRange();
 
-
-
             //GameManager.instance.TextWeapon.color = weaponManager.getCurrentWeapon().getWeaponRarity().color;
 		}
 		
@@ -56,7 +56,27 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             {
                 weaponBeingSwapped = true;
                 StartCoroutine(swapWeapon(true));
-            }else if (!base.moving)
+            }else if(Input.GetKey(KeyCode.UpArrow)){
+                facing = FacingDirection.Up;
+                updateWeaponRange(facing);
+            }
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                facing = FacingDirection.Right;
+                updateWeaponRange(facing);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow))
+            {
+                facing = FacingDirection.Down;
+                updateWeaponRange(facing);
+            }
+            else if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                facing = FacingDirection.Left;
+                updateWeaponRange(facing);
+            }
+            
+            else if (!base.moving)
             {
                 int horizontal = 0;  	//Used to store the horizontal move direction.
                 int vertical = 0;		//Used to store the vertical move direction.
@@ -81,6 +101,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                     AttemptMove<Wall>(horizontal, vertical);
                 }
             }
+
 		}
 
         IEnumerator swapWeapon(bool positiveSwap)
@@ -95,26 +116,31 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
 			GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
-            updateWeaponRange();
+            updateWeaponRange(facing);
             yield return new WaitForSeconds(0.1f);
             weaponBeingSwapped = false;
         }
 
-        private void updateWeaponRange()
+        private void updateWeaponRange(FacingDirection dir)
         {
-            for (int i = 0; i < 25; i++)
+            for (int i = 0; i <= 4; i++)
             {
-                if(weaponManager.getCurrentWeapon().getWeaponRange()[i] == 1)
+                for (int j = 0; j <= 4; j++)
                 {
-                    GameManager.instance.weaponRange[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/attackRange");
-                }
-                else
-                {
-                    GameManager.instance.weaponRange[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/noAttackRange");
+                    GameManager.instance.weaponRange[i, j].GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponManager.getCurrentWeapon().getWeaponRange(facing)[i, j] == 1 ? "Sprites/attackRange" : "Sprites/noAttackRange");
                 }
             }
         }
-
+        private void updateWeaponRange()
+        {
+            for (int i = 0; i <= 4; i++)
+            {
+                for (int j = 0; j <= 4; j++)
+                {
+                    GameManager.instance.weaponRange[i, j].GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponManager.getCurrentWeapon().getWeaponRange()[i, j] == 1 ? "Sprites/attackRange" : "Sprites/noAttackRange");
+                }
+            }
+        }
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject
 		//AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
 		protected override void AttemptMove <T> (int xDir, int yDir)
@@ -200,7 +226,10 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 				GameManager.instance.GameOver ();
 			}
 		}
-
+        public enum FacingDirection
+        {
+            Up, Right, Down, Left
+        }
 	}
 
 

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 public abstract class Weapon {
-    private int[] weaponRange;
+    private int[,] weaponRange;
     private float damageFactor;
     private WeaponRarity weaponRarity;
     private string weaponImage;
@@ -52,11 +52,57 @@ public abstract class Weapon {
         this.damageFactor = weaponDamageFactor;
     }
 
-    public int[] getWeaponRange()
+    public int[,] getWeaponRange()
     {
         return weaponRange;
     }
-    public void setWeaponRange(int[] weaponRange)
+
+    public int[,] getWeaponRange(Player.FacingDirection dir)
+    {
+        int[,] returnValue = new int[5,5];
+        int maxInt = 4;
+        switch (dir)
+        {
+            case Player.FacingDirection.Up:
+                for (int i = 0; i <= maxInt; i++)
+                {
+                    for (int j = 0; j <= maxInt; j++)
+                    {
+                        returnValue[i, j] = this.getWeaponRange()[i, j] == 1 ? 1 : 0;
+                    }
+                }
+                break;
+            case Player.FacingDirection.Right:
+                for (int i = 0; i <= maxInt; i++)
+                {
+                    for (int j = 0; j <= maxInt; j++)
+                    {
+                        returnValue[j, maxInt-i] = this.getWeaponRange()[i, j] == 1 ? 1 : 0;
+                    }
+                }
+                break;
+            case Player.FacingDirection.Down:
+                for (int i = 0; i <= maxInt; i++)
+                {
+                    for (int j = 0; j <= maxInt; j++)
+                    {
+                        returnValue[maxInt-i, maxInt-j] = this.getWeaponRange()[i, j] == 1 ? 1 : 0;
+                    }
+                }
+                break;
+            case Player.FacingDirection.Left:
+                for (int i = 0; i <= maxInt; i++)
+                {
+                    for (int j = 0; j <= maxInt; j++)
+                    {
+                        returnValue[maxInt-j, i] = this.getWeaponRange()[i, j] == 1 ? 1 : 0;
+                    }
+                }
+                break;
+        }
+        return returnValue;
+    }
+    public void setWeaponRange(int[,] weaponRange)
     {
         this.weaponRange = weaponRange;
     }

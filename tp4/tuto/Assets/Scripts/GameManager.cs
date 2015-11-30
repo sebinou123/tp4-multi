@@ -26,7 +26,7 @@ using System.Collections;
         public Text TextArmor;
         public Text TextLevel;
         public Text TextWeapon;
-        public GameObject[] weaponRange;
+        public GameObject[,] weaponRange;
         public Image ImageWeapon;
         private BoardManager boardScript;						//Store a reference to our BoardManager which will set up the level.
 		public int level = 1;									//Current level number, expressed in game as "Day 1".
@@ -101,13 +101,6 @@ using System.Collections;
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
 
-           
-
-            weaponRange = new GameObject[25];
-            for (int i = 0; i < weaponRange.Length; i++)
-            {
-                weaponRange[i] = GameObject.Find("Image (" + i + ")");
-            }
 
             //Set the text of levelText to the string "Day" and append the current level number.
             levelText.text = "Day " + level;
@@ -126,11 +119,14 @@ using System.Collections;
 			TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
 			ImageWeapon = GameObject.Find("ImageWeapon").GetComponent<Image>();
 
-			weaponRange = new GameObject[25];
-			for (int i = 0; i < weaponRange.Length; i++)
-			{
-				weaponRange[i] = GameObject.Find("Image (" + i + ")");
-			}
+            weaponRange = new GameObject[5, 5];
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    weaponRange[i, j] = GameObject.Find("Range" + ((i * 5) + j));
+                }
+            }
 
 		 	player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"));
 			player.name = "Player";
