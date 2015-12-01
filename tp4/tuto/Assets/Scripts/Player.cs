@@ -9,7 +9,8 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 	//Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
 	public class Player : MovingObject
 	{
-		public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
+        public float restartLevelDelay = 1f;		//Delay time in seconds to restart level.
+        public const float attackDelay = 0.5f;		//Delay time in seconds to restart level.
 		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
@@ -17,10 +18,9 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
 
-        public int level = 5;
-        public int hp = 250;
         public int maxHp = 300;
-        public int experience;
+        public int armor;
+        public float experience;
         public WeaponManager weaponManager;
         public int weaponLevel = 1;
 
@@ -75,8 +75,12 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 facing = FacingDirection.Left;
                 updateWeaponRange(facing);
             }
-            
-            else if (!base.moving)
+            else if (Input.GetKey(KeyCode.Space) && !attacking)
+            {
+                attacking = true;
+                StartCoroutine(attackRoutine());
+            }
+            if (!base.moving)
             {
                 int horizontal = 0;  	//Used to store the horizontal move direction.
                 int vertical = 0;		//Used to store the vertical move direction.
@@ -103,6 +107,50 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             }
 
 		}
+
+        public override float onHit(float damageDealt)
+        {
+            base.onHit(damageDealt-this.armor);
+            return 0;
+        }
+
+        IEnumerator attackRoutine()
+        {
+            int maxInt = 5;
+            Vector2 playerPos = transform.position;
+            int[,] attackedBlocks = weaponManager.getCurrentWeapon().getWeaponRange(facing);
+            for (int i = 0; i < maxInt; i++)
+            {
+                for (int j = 0; j < maxInt; j++)
+                {
+                    if (attackedBlocks[i, j] == 1)
+                    {
+                        Vector2 attackedXY = new Vector2(playerPos.x + i - 2, playerPos.y + j - 2);
+                        //Disable the boxCollider so that linecast doesn't hit this object's own collider.
+                        boxCollider.enabled = false;
+                        RaycastHit2D hit;
+                        //Cast a line from start point to end point checking collision on blockingLayer.
+                        Move((int)attackedXY.x, (int)attackedXY.y, out hit);
+
+                        //Re-enable boxCollider after linecast
+                        boxCollider.enabled = true;
+
+                        if (hit.transform != null)
+                        {
+                            Debug.Log(hit.transform.position.x);
+                            Enemy hitComponent = hit.transform.GetComponent<Enemy>();
+                            if (hitComponent != null)
+                            {
+                                Debug.Log(hitComponent!=null);
+                                this.gainExperience(hitComponent.onHit(weaponManager.getCurrentWeapon().getWeaponDamage()));
+                            }
+                        }
+                    }
+                }
+            }
+                yield return new WaitForSeconds(attackDelay);
+            attacking = false;
+        }
 
         IEnumerator swapWeapon(bool positiveSwap)
         {
@@ -139,6 +187,15 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 {
                     GameManager.instance.weaponRange[i, j].GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponManager.getCurrentWeapon().getWeaponRange()[i, j] == 1 ? "Sprites/attackRange" : "Sprites/noAttackRange");
                 }
+            }
+        }
+
+        public void gainExperience(float amount)
+        {
+            this.experience += amount;
+            if (experience >= 50 * Mathf.Exp(0.1f * level))
+            {
+                this.level++;
             }
         }
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject

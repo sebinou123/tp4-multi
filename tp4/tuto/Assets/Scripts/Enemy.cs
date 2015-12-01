@@ -4,10 +4,10 @@ using System.Collections;
 	//Enemy inherits from MovingObject, our base class for objects that can move, Player also inherits from this.
 	public class Enemy : MovingObject
 	{
-		public int playerDamage; 							//The amount of food points to subtract from the player when attacking.
+		public float playerDamage; 							//The amount of food points to subtract from the player when attacking.
+        public const float experienceYield = 5f;
 		public AudioClip attackSound1;						//First of two audio clips to play when attacking the player.
 		public AudioClip attackSound2;						//Second of two audio clips to play when attacking the player.
-		
 		
 		private Animator animator;							//Variable of type Animator to store a reference to the enemy's Animator component.
 		private Transform target;							//Transform to attempt to move toward each turn.
@@ -25,11 +25,15 @@ using System.Collections;
 			
 			//Find the Player GameObject using it's tag and store a reference to its transform component.
 			target = GameObject.FindGameObjectWithTag ("Player").transform;
+
+            level = GameManager.instance.level;
+            hp = Mathf.Ceil(2*Mathf.Exp(0.2f*level));
+            playerDamage = Mathf.Ceil(0.2f*Mathf.Exp(0.2f*level));
 			
 			//Call the start function of our base class MovingObject.
 			base.Start ();
 		}
-		
+
 		
 		//Override the AttemptMove function of MovingObject to include functionality needed for Enemy to skip turns.
 		//See comments in MovingObject for more on how base AttemptMove function works.
@@ -73,7 +77,7 @@ using System.Collections;
 			Player hitPlayer = component as Player;
 			
 			//Call the LoseFood function of hitPlayer passing it playerDamage, the amount of foodpoints to be subtracted.
-			hitPlayer.LoseFood (playerDamage);
+			hitPlayer.onHit(playerDamage);
 			
 			//Set the attack trigger of animator to trigger Enemy attack animation.
 			animator.SetTrigger ("enemyAttack");
@@ -81,4 +85,16 @@ using System.Collections;
 			//Call the RandomizeSfx function of SoundManager passing in the two audio clips to choose randomly between.
 			SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);
 		}
+
+        public override float onHit(float damageDealt)
+        {
+            base.onHit(damageDealt);
+            if (this.hp <= 0)
+            {
+                Destroy(this);
+            }
+            return hp <= 0 ? experienceYield : 0;
+        }
+
+
 	}

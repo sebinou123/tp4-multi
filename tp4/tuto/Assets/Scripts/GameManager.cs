@@ -82,13 +82,7 @@ using System.Collections;
 		
 		//Initializes the game for each level.
 		public void InitGame()
-		{ /*private Text TextName;
-        private Text TextStats;
-        private Text TextArmor;
-        private Text TextLevel;
-        private Text TextWeapon;
-        private GameObject[] weaponRange;
-        private GameObject ImageWeapon;*/
+		{ 
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 			
@@ -200,8 +194,10 @@ using System.Collections;
 			//Loop through List of Enemy objects.
 			for (int i = 0; i < enemies.Count; i++)
 			{
-				//Call the MoveEnemy function of Enemy at index i in the enemies List.
-				enemies[i].MoveEnemy ();
+                if(enemies[i] != null){
+				    //Call the MoveEnemy function of Enemy at index i in the enemies List.
+				    enemies[i].MoveEnemy ();
+                }
 			}
 			
 			//Enemies are done moving, set enemiesMoving to false.

@@ -8,9 +8,12 @@ using System.Collections;
 		public float moveTime = 0.1f;			//Time it will take object to move, in seconds.
         public LayerMask blockingLayer;			//Layer on which collision will be checked.
         public bool moving;
+        public bool attacking;
+        public BoxCollider2D boxCollider; 		//The BoxCollider2D component attached to this object.
+        public int level;
+        public float hp;
 
         private Vector2 startPosition;
-		private BoxCollider2D boxCollider; 		//The BoxCollider2D component attached to this object.
 		private Rigidbody2D rb2D;				//The Rigidbody2D component attached to this object.
 		private float inverseMoveTime;			//Used to make movement more efficient.
 		
@@ -50,7 +53,7 @@ using System.Collections;
 			boxCollider.enabled = true;
 			
 			//Check if anything was hit
-			if(hit.transform == null && !moving)
+			if(hit.transform == null && !moving && !attacking)
 			{
 				//If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
 				StartCoroutine (SmoothMovement (end));
@@ -115,10 +118,21 @@ using System.Collections;
 				//Call the OnCantMove function and pass it hitComponent as a parameter.
 				OnCantMove (hitComponent);
 		}
+
+        public virtual float onHit(float damageDealt)
+        {
+            hp-= damageDealt;
+            return 0;
+        }
 		
 		
 		//The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
 		//OnCantMove will be overriden by functions in the inheriting classes.
 		protected abstract void OnCantMove <T> (T component)
 			where T : Component;
+
+        private void OnDestroy()
+        {
+           
+        }
 	}
