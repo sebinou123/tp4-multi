@@ -91,7 +91,7 @@ using System.Collections;
             base.onHit(damageDealt);
             if (this.hp <= 0)
             {
-                Destroy(this);
+                gameObject.SetActive(false);
             }
             return hp <= 0 ? experienceYield : 0;
         }

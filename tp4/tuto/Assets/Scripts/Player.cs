@@ -148,7 +148,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                     }
                 }
             }
-                yield return new WaitForSeconds(attackDelay);
+            yield return new WaitForSeconds(attackDelay);
             attacking = false;
         }
 
