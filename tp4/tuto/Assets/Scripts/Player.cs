@@ -125,24 +125,13 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 {
                     if (attackedBlocks[i, j] == 1)
                     {
-                        Vector2 attackedXY = new Vector2(playerPos.x + i - 2, playerPos.y + j - 2);
-                        //Disable the boxCollider so that linecast doesn't hit this object's own collider.
-                        boxCollider.enabled = false;
-                        RaycastHit2D hit;
-                        //Cast a line from start point to end point checking collision on blockingLayer.
-                        Move((int)attackedXY.x, (int)attackedXY.y, out hit);
-
-                        //Re-enable boxCollider after linecast
-                        boxCollider.enabled = true;
-
-                        if (hit.transform != null)
-                        {
-                            Debug.Log(hit.transform.position.x);
-                            Enemy hitComponent = hit.transform.GetComponent<Enemy>();
-                            if (hitComponent != null)
+                        Vector2 attackedXY = new Vector2(playerPos.x + j - 2, playerPos.y - i + 2);
+                        Debug.Log(playerPos.x + " " + playerPos.y);
+                        Debug.Log(attackedXY.x  + " " + attackedXY.y);
+                        foreach(Enemy go in GameManager.instance.enemies){
+                            if (go.transform.position.x == attackedXY.x && go.transform.position.y == attackedXY.y)
                             {
-                                Debug.Log(hitComponent!=null);
-                                this.gainExperience(hitComponent.onHit(weaponManager.getCurrentWeapon().getWeaponDamage()));
+                                this.gainExperience(go.onHit(weaponManager.getCurrentWeapon().getWeaponDamage()));
                             }
                         }
                     }
