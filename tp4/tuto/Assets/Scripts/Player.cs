@@ -15,6 +15,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
         public Text foodText;
+
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
 
@@ -25,7 +26,29 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         public int weaponLevel = 1;
 
         private bool weaponBeingSwapped = false;
-        private FacingDirection facing = FacingDirection.Up;                     
+        private FacingDirection facing = FacingDirection.Up;     
+		//private Player instance;
+
+	/**
+	public void Awake()
+	{
+		//Check if instance already exists
+		if (instance == null)
+			
+			//if not, set instance to this
+			instance = this;
+		
+		//If instance already exists and it's not this:
+		else if (instance != this)
+			
+			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+			Destroy(gameObject);	
+		
+		//Sets this to not be destroyed when reloading scene
+		DontDestroyOnLoad(gameObject);
+	
+	}*/
+
 		
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()

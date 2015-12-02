@@ -26,14 +26,15 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		
 		public int columns = 8; 										//Number of columns in our game board.
 		public int rows = 8;											//Number of rows in our game board.
-		public Count wallCount = new Count (5, 9);						//Lower and upper limit for our random number of walls per level.
-		public Count foodCount = new Count (1, 5);						//Lower and upper limit for our random number of food items per level.
+		public Count decorCount = new Count(5,9);						//Lower and upper limit for our random number of food items per level.
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
-		public GameObject[] wallTiles;									//Array of wall prefabs.
-		public GameObject[] foodTiles;									//Array of food prefabs.
+		public GameObject[] decorTiles;									//Array of food prefabs.
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
 		public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
+		public int lavaCount = 6;
+		public int lavaspot = 8;
+		public GameObject[] lavaTile;
 		
 		private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
@@ -103,6 +104,19 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			//Return the randomly selected Vector3 position.
 			return randomPosition;
 		}
+
+	void deletePosibility (Vector3 position)
+	{
+		List<Vector3> newList = new List<Vector3>(gridPositions);
+		int index = 0;
+		foreach(Vector3 element in newList){
+			if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
+				gridPositions.RemoveAt (index);
+			}
+
+			index++;
+		}
+	}
 		
 		
 		//LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
@@ -126,6 +140,118 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 
 		}
+
+	void LayoutLava(GameObject[] tileArray, int numberspot, int numbertylelava)
+	{
+		bool first = true;
+		bool goodNumber = false;
+		int randomNumber = 0;
+		int currentNumber = 0;
+			for(int i = 0; i < numberspot; i++)
+			{
+			//Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
+			Vector3 randomPosition = RandomPosition();
+			
+			//Choose a random tile from tileArray and assign it to tileChoice
+			GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
+			
+			//Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
+			Instantiate(tileChoice, randomPosition, Quaternion.identity);
+
+					for(int j = 0; (j < numbertylelava - 1); j++)
+					{	
+						if(first == true){
+							randomNumber = Random.Range(0,8);
+							currentNumber = randomNumber;
+							first = false;
+						}else{
+							do{
+								randomNumber = Random.Range(0,8);
+
+								if(randomNumber == currentNumber){
+									goodNumber = false;
+								}else{
+									goodNumber = true;
+								}
+							}while(goodNumber != true);
+						}
+
+						if(randomNumber == 0){
+							if(randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns )
+							{
+								randomPosition.x +=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+					
+							}
+						}else if(randomNumber == 1){
+							if(randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns )
+							{
+								randomPosition.x -=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+
+						}else if(randomNumber == 2){
+							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows )
+							{
+								randomPosition.y +=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+
+						}else if(randomNumber == 3){
+							if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows )
+							{
+								randomPosition.y -=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+
+						}else if(randomNumber == 4){
+					if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows && randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns)
+							{
+								randomPosition.x -=1;
+								randomPosition.y -=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+							
+						}else if(randomNumber == 5){
+						if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows && randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns)
+							{
+								randomPosition.x +=1;
+								randomPosition.y -=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+							
+						}else if(randomNumber == 6){
+							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows && randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns)
+							{
+								randomPosition.x +=1;
+								randomPosition.y +=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+							
+						}else if(randomNumber == 7){
+							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows && randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns)
+							{
+								randomPosition.x -=1;
+								randomPosition.y +=1;
+								Instantiate(tileChoice, randomPosition, Quaternion.identity);
+								deletePosibility(randomPosition);
+							}
+							
+						}
+					}
+			}
+	}
+
+
+
+
 		
 		
 		//SetupScene initializes our level and calls the previous functions to lay out the game board
@@ -137,11 +263,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			//Reset our list of gridpositions.
 			InitialiseList ();
 			
-			//Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (wallTiles, wallCount.minimum, wallCount.maximum);
-			
+			LayoutLava(lavaTile, lavaspot, lavaCount);
 			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (foodTiles, foodCount.minimum, foodCount.maximum);
+			LayoutObjectAtRandom (decorTiles, decorCount.minimum, decorCount.maximum);
 			
 			//Determine number of enemies based on current level number, based on a logarithmic progression
 			int enemyCount = (int)Mathf.Log(level, 2f);
@@ -152,5 +276,8 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			//Instantiate the exit tile in the upper right hand corner of our game board
 			Instantiate (exit, new Vector3 (5, 5, 0f), Quaternion.identity);
 		}
+
+
+
 	}
 

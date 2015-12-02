@@ -33,6 +33,7 @@ using System.Collections;
 		public List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
+		private bool playerInstanciate = true;	
 		
 		
 		
@@ -122,8 +123,13 @@ using System.Collections;
                 }
             }
 
-		 	player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"));
+		//if (playerInstanciate == true) {
+			player = (GameObject)Instantiate (Resources.Load ("Prefabs/Player"));
 			player.name = "Player";
+		//	playerInstanciate = false;
+		//}
+
+
 			camera = GameObject.Find ("Main Camera").GetComponent<SmoothCamera2D>();
 			camera.target = player.transform;
 			

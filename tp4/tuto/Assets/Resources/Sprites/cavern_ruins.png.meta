@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 61e9e1cea3e201543853b953e0204792
-timeCreated: 1448827451
-licenseType: Free
+timeCreated: 1448999060
+licenseType: Pro
 TextureImporter:
   fileIDToRecycleName:
     21300000: cavern_ruins_0
@@ -29,6 +29,9 @@ TextureImporter:
     21300044: cavern_ruins_22
     21300046: cavern_ruins_23
     21300048: cavern_ruins_24
+    21300050: cavern_ruins_5
+    21300052: cavern_ruins_25
+    21300054: cavern_ruins_26
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -119,9 +122,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 98
-        y: 324
+        y: 320
         width: 29
-        height: 28
+        height: 32
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,7 +154,7 @@ TextureImporter:
         x: 353
         y: 128
         width: 31
-        height: 33
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,7 +164,7 @@ TextureImporter:
         x: 384
         y: 129
         width: 32
-        height: 32
+        height: 29
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,7 +174,7 @@ TextureImporter:
         x: 416
         y: 130
         width: 30
-        height: 32
+        height: 29
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -241,7 +244,7 @@ TextureImporter:
         x: 290
         y: 129
         width: 31
-        height: 32
+        height: 30
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,6 +325,36 @@ TextureImporter:
         y: 289
         width: 34
         height: 65
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cavern_ruins_5
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 129
+        width: 29
+        height: 29
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cavern_ruins_25
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 166
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cavern_ruins_26
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 460
+        width: 37
+        height: 37
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
