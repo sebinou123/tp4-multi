@@ -60,10 +60,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 			base.Start ();
 
             weaponManager = new WeaponManager();
-            GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
-            GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
-            GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
-            updateWeaponRange();
+            updateInfosPlayer();
 
             //GameManager.instance.TextWeapon.color = weaponManager.getCurrentWeapon().getWeaponRarity().color;
 		}
@@ -81,22 +78,22 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 StartCoroutine(swapWeapon(true));
             }else if(Input.GetKey(KeyCode.UpArrow)){
                 facing = FacingDirection.Up;
-                updateWeaponRange(facing);
+                updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
                 facing = FacingDirection.Right;
-                updateWeaponRange(facing);
+                updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
                 facing = FacingDirection.Down;
-                updateWeaponRange(facing);
+                updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
                 facing = FacingDirection.Left;
-                updateWeaponRange(facing);
+                updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.Space) && !attacking)
             {
@@ -131,6 +128,14 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 
 		}
 
+        private void updateInfosPlayer()
+        {
+            GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
+            GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
+            GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
+            updateWeaponRange();
+        }
+
         public override float onHit(float damageDealt)
         {
             base.onHit(damageDealt-this.armor);
@@ -149,8 +154,6 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                     if (attackedBlocks[i, j] == 1)
                     {
                         Vector2 attackedXY = new Vector2(playerPos.x + j - 2, playerPos.y - i + 2);
-                        Debug.Log(playerPos.x + " " + playerPos.y);
-                        Debug.Log(attackedXY.x  + " " + attackedXY.y);
                         foreach(Enemy go in GameManager.instance.enemies){
                             if (go.transform.position.x == attackedXY.x && go.transform.position.y == attackedXY.y)
                             {
@@ -173,31 +176,18 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             {
                 weaponManager.previousAvailable(true);
             }
-            GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
-            GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
-			GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
-            updateWeaponRange(facing);
+            updateInfosPlayer();
             yield return new WaitForSeconds(0.1f);
             weaponBeingSwapped = false;
         }
 
-        private void updateWeaponRange(FacingDirection dir)
-        {
-            for (int i = 0; i <= 4; i++)
-            {
-                for (int j = 0; j <= 4; j++)
-                {
-                    GameManager.instance.weaponRange[i, j].GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponManager.getCurrentWeapon().getWeaponRange(facing)[i, j] == 1 ? "Sprites/attackRange" : "Sprites/noAttackRange");
-                }
-            }
-        }
         private void updateWeaponRange()
         {
             for (int i = 0; i <= 4; i++)
             {
                 for (int j = 0; j <= 4; j++)
                 {
-                    GameManager.instance.weaponRange[i, j].GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponManager.getCurrentWeapon().getWeaponRange()[i, j] == 1 ? "Sprites/attackRange" : "Sprites/noAttackRange");
+                    GameManager.instance.weaponRange[i, j].GetComponent<Image>().sprite = Resources.Load<Sprite>(weaponManager.getCurrentWeapon().getWeaponRange(facing)[i, j] == 1 ? "Sprites/attackRange" : "Sprites/noAttackRange");
                 }
             }
         }
