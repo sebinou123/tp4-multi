@@ -7,8 +7,9 @@ using System.Collections;
 	
 	public class GameManager : MonoBehaviour
 	{
+        private const float aggroRange = 10f;
 		public float levelStartDelay = 2f;						//Time to wait before starting level, in seconds.
-		public float turnDelay = 0.1f;							//Delay between each Player turn.
+		public float turnDelay = 0.5f;							//Delay between each Player turn.
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		public Sprite[] items = new Sprite[10];
 
@@ -200,7 +201,7 @@ using System.Collections;
 			//Loop through List of Enemy objects.
 			for (int i = 0; i < enemies.Count; i++)
 			{
-                if(enemies[i] != null && enemies[i].isActiveAndEnabled){
+                if(enemies[i] != null && enemies[i].isActiveAndEnabled && Vector2.Distance(enemies[i].transform.position, player.transform.position) < aggroRange){
 				    //Call the MoveEnemy function of Enemy at index i in the enemies List.
 				    enemies[i].MoveEnemy ();
                 }
