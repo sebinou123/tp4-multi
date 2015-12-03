@@ -32,11 +32,14 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 
 	public void Awake()
 	{
+
 		//Check if instance already exists
 		if (instance == null)
 			
 			//if not, set instance to this
 			instance = this;
+
+
 		
 		//If instance already exists and it's not this:
 		else if (instance != this)
@@ -289,6 +292,13 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         {
             Up, Right, Down, Left
         }
+
+	public void updateCanva()
+	{
+		GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
+		GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
+		GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
+	}
 	}
 
 
