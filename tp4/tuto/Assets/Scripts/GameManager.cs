@@ -124,12 +124,14 @@ using System.Collections;
                 }
             }
 
-		//if (playerInstanciate == true) {
+		if (playerInstanciate == true) {
 			player = (GameObject)Instantiate (Resources.Load ("Prefabs/Player"));
 			player.name = "Player";
-		//	playerInstanciate = false;
-		//}
+			playerInstanciate = false;
+		}
 
+		GameObject.Find ("Player").GetComponent<Player> ().enabled = true;
+			GameObject.Find ("Player").GetComponent<Player>().transform.position = new Vector3(0,0,0);
 
 			camera = GameObject.Find ("Main Camera").GetComponent<SmoothCamera2D>();
 			camera.target = player.transform;

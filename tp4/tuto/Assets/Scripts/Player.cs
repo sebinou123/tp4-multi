@@ -27,9 +27,9 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 
         private bool weaponBeingSwapped = false;
         private FacingDirection facing = FacingDirection.Up;     
-		//private Player instance;
+		private Player instance;
 
-	/**
+
 	public void Awake()
 	{
 		//Check if instance already exists
@@ -47,7 +47,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
 	
-	}*/
+	}
 
 		
 		//Start overrides the Start function of MovingObject
