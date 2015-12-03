@@ -59,10 +59,8 @@
      <Compile Include="Assets\Scripts\SoundManager.cs" />
      <Compile Include="Assets\Scripts\SwordOfTruth.cs" />
      <Compile Include="Assets\Scripts\Wall.cs" />
-     <Compile Include="Assets\Scripts\Warrior.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\WeaponManager.cs" />
-     <Compile Include="Assets\Scripts\Wizard.cs" />
      <Compile Include="Assets\Scripts\btnCreateHero.cs" />
      <Compile Include="Assets\Scripts\btnStartGame.cs" />
      <Compile Include="Assets\Scripts\scriptBtnExit.cs" />
