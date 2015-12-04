@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class btnStartGame : MonoBehaviour {
 
 	public static GameManager game;
+	//name of player
 	public static string name;
+
 
 	public void startGame(){
 		InputField i = GameObject.Find ("CanvasCreateHero(Clone)").GetComponentInChildren<InputField>();
