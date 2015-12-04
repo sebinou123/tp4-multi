@@ -120,16 +120,6 @@ public abstract class Weapon {
         this.weaponRange = weaponRange;
     }
 
-    public string getWeaponImage()
-    {
-        return weaponImage;
-    }
-
-    public void setWeaponImage(string weaponImage)
-    {
-        this.weaponImage = weaponImage;
-    }
-
     public string getWeaponName()
     {
         return weaponName;

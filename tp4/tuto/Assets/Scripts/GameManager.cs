@@ -11,7 +11,7 @@ using System.Collections;
 		public float levelStartDelay = 2f;						//Time to wait before starting level, in seconds.
 		public float turnDelay = 0.5f;							//Delay between each Player turn.
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
-		public Sprite[] items = new Sprite[10];
+		public Sprite[] items = new Sprite[4];
 
 		public SmoothCamera2D camera;
 		public bool firtTimeLoad = true;

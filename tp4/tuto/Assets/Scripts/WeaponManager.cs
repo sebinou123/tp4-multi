@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WeaponManager
 {
-    public static int WEAPONS_AVAILABLE = 3;
+    public static int WEAPONS_AVAILABLE = 4;
     public static Weapon[] weaponsAvailable;
     private Weapon currentWeapon;
     private int weaponIndex;
@@ -15,6 +15,7 @@ public class WeaponManager
         weaponsAvailable[0] = new BasicSword(1);
         weaponsAvailable[1] = new SwordOfTruth(0);
         weaponsAvailable[2] = new KnightSword(0);
+        weaponsAvailable[3] = new WhirlwindAxe(1);
         weaponIndex = 0;
         currentWeapon = weaponsAvailable[weaponIndex];
     }
@@ -27,6 +28,7 @@ public class WeaponManager
         weaponsAvailable[0] = new BasicSword(weaponsLevels[0]);
         weaponsAvailable[1] = new SwordOfTruth(weaponsLevels[1]);
         weaponsAvailable[2] = new KnightSword(weaponsLevels[2]);
+        weaponsAvailable[2] = new WhirlwindAxe(weaponsLevels[3]);
         weaponIndex = equippedWeapon;
         currentWeapon = weaponsAvailable[weaponIndex];
     }

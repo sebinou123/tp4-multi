@@ -134,6 +134,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 
         private void updateInfosPlayer()
         {
+            GameManager.instance.TextName.text = btnStartGame.name;
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
             GameManager.instance.TextLevel.text = "" + this.level;
