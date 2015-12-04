@@ -9,7 +9,6 @@ public class KnightSword : Weapon {
                                  {0, 0, 0, 0, 0},
                                  {0, 0, 0, 0, 0}};
     private const float damageFactor = 1.5f;
-    private const Weapon.WeaponRarity weaponRarity = Weapon.WeaponRarity.Rare;
     private const string weaponName = "Knight Sword";
 
     public KnightSword(int weaponLevel)

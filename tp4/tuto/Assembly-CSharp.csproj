@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Wall.cs" />
      <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\WeaponManager.cs" />
+     <Compile Include="Assets\Scripts\WhirlwindAxe.cs" />
      <Compile Include="Assets\Scripts\btnCreateHero.cs" />
      <Compile Include="Assets\Scripts\btnStartGame.cs" />
      <Compile Include="Assets\Scripts\scriptBtnExit.cs" />

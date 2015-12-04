@@ -4,23 +4,11 @@ using UnityEngine;
 public abstract class Weapon {
     private int[,] weaponRange;
     private float damageFactor;
-    private WeaponRarity weaponRarity;
     private string weaponImage;
     private string weaponName;
 
     private float damage;
     private int weaponLevel;
-
-    public enum WeaponRarity
-    {
-        Unique, Rare, Common
-        //Normal(new Color(255,255,255,255)), Rare(), Unique();
-        //
-        // Color color;
-        //WeaponRarity(Color color){
-        //    this.color = color;
-        //}
-    }
 
     public int getWeaponLevel()
     {
@@ -102,6 +90,31 @@ public abstract class Weapon {
         }
         return returnValue;
     }
+
+    public static Weapon getWeaponDrop(int level)
+    {
+        Weapon returnValue = null;
+        System.Random rnd = new System.Random();
+        int randomType = rnd.Next(0,100);
+        int randomWeapon = rnd.Next(0,100);
+        if (randomType < 5)
+        {
+            returnValue = new SwordOfTruth(level);
+        }
+        else if (randomType < 25)
+        {
+            if (randomWeapon < 50)
+                returnValue = new KnightSword(level);
+            else
+                returnValue = new WhirlwindAxe(level);
+        }
+        else
+        {
+            returnValue = new BasicSword(level);
+        }
+
+        return returnValue;
+    }
     public void setWeaponRange(int[,] weaponRange)
     {
         this.weaponRange = weaponRange;
@@ -115,16 +128,6 @@ public abstract class Weapon {
     public void setWeaponImage(string weaponImage)
     {
         this.weaponImage = weaponImage;
-    }
-
-    public WeaponRarity getWeaponRarity()
-    {
-        return weaponRarity;
-    }
-
-    public void setWeaponRarity(WeaponRarity weaponRarity)
-    {
-        this.weaponRarity = weaponRarity;
     }
 
     public string getWeaponName()

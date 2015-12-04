@@ -10,7 +10,6 @@ public class BasicSword : Weapon
                                  {0, 0, 0, 0, 0},
                                  {0, 0, 0, 0, 0}};
     private const float damageFactor = 1f;
-    private const Weapon.WeaponRarity weaponRarity = Weapon.WeaponRarity.Common;
     private const string weaponName = "Basic Sword";
 
     public BasicSword(int weaponLevel)
