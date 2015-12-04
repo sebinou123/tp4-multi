@@ -93,9 +93,6 @@ using System.Collections;
 			levelImage.name = "Canvas";
 			infoplayer = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasInfoPlayer")); 
 
-			if (playerInstanciate == false) {
-				GameObject.Find ("Player").GetComponent<Player> ().updateCanva ();
-			}
 			
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();

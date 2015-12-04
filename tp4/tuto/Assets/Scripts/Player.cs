@@ -45,7 +45,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		else if (instance != this)
 			
 			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-			Destroy(gameObject);	
+			Destroy(gameObject);
 		
 		//Sets this to not be destroyed when reloading scene
 		DontDestroyOnLoad(gameObject);
@@ -63,7 +63,6 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 			base.Start ();
 
             weaponManager = new WeaponManager();
-            updateInfosPlayer();
 
             //GameManager.instance.TextWeapon.color = weaponManager.getCurrentWeapon().getWeaponRarity().color;
 		}
@@ -128,7 +127,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                     AttemptMove<Wall>(horizontal, vertical);
                 }
             }
-
+            updateInfosPlayer();
 		}
 
         private void updateInfosPlayer()
@@ -292,13 +291,6 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         {
             Up, Right, Down, Left
         }
-
-	public void updateCanva()
-	{
-		GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
-		GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
-		GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
-	}
 	}
 
 
