@@ -63,16 +63,16 @@ using System.Collections;
 			boardScript = GetComponent<BoardManager>();
 	
 			//Call the InitGame function to initialize the first level 
-		if (firtTimeLoad == false) {
-			InitGame();
-		}
+		    if (firtTimeLoad == false) {
+			    InitGame();
+		    }
 
-		if (firtTimeLoad == true) {
-			menuprincipal = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasMenuPrincipal")); 
-			menuprincipal.SetActive (true);
-			firtTimeLoad = false;
-		}
-	}
+		    if (firtTimeLoad == true) {
+			    menuprincipal = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasMenuPrincipal")); 
+			    menuprincipal.SetActive (true);
+			    firtTimeLoad = false;
+		    }
+	    }
 		//This is called each time a scene is loaded.
 		void OnLevelWasLoaded(int index)
 		{
@@ -84,7 +84,8 @@ using System.Collections;
 		
 		//Initializes the game for each level.
 		public void InitGame()
-		{ 
+		{
+            level = player != null ? player.GetComponent<Player>().getLevel() : 1;
 			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
 			doingSetup = true;
 			
@@ -124,11 +125,11 @@ using System.Collections;
                 }
             }
 
-		if (playerInstanciate == true) {
-			player = (GameObject)Instantiate (Resources.Load ("Prefabs/Player"));
-			player.name = "Player";
-			playerInstanciate = false;
-		}
+		    if (playerInstanciate == true) {
+			    player = (GameObject)Instantiate (Resources.Load ("Prefabs/Player"));
+			    player.name = "Player";
+			    playerInstanciate = false;
+		    }
 
 			GameObject.Find ("Player").GetComponent<Player> ().enabled = true;
 			GameObject.Find ("Player").GetComponent<Player>().transform.position = new Vector3(0,0,0);
@@ -141,7 +142,6 @@ using System.Collections;
 			
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
-			
 		}
 		
 		

@@ -14,7 +14,6 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
-        public Text foodText;
 
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
@@ -23,7 +22,6 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         public int armor;
         public float experience;
         public WeaponManager weaponManager;
-        public int weaponLevel = 1;
 
         private bool weaponBeingSwapped = false;
         private FacingDirection facing = FacingDirection.Up;     
@@ -56,6 +54,10 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		//Start overrides the Start function of MovingObject
 		protected override void Start ()
 		{
+            this.experience = 0;
+            this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
+            this.armor = this.level * 2;
+            this.hp = this.maxHp;
 			//Get a component reference to the Player's animator component
 			animator = GetComponent<Animator>();
 			
@@ -134,6 +136,8 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         {
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
+            GameManager.instance.TextLevel.text = "" + this.level;
+            GameManager.instance.TextArmor.text = "" + this.armor;
             GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
             updateWeaponRange();
         }
@@ -200,6 +204,10 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             if (experience >= 50 * Mathf.Exp(0.1f * level))
             {
                 this.level++;
+                this.experience = 0;
+                this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
+                this.armor = this.level*2;
+                this.hp = this.maxHp;
             }
         }
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject
@@ -269,6 +277,11 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 			//Check to see if game has ended.
 			CheckIfGameOver ();
 		}
+
+        public int getLevel()
+        {
+            return this.level;
+        }
 		
 		
 		//CheckIfGameOver checks if the player is out of food points and if so, ends the game.

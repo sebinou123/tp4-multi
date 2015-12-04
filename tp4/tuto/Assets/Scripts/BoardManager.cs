@@ -105,18 +105,19 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			return randomPosition;
 		}
 
-	void deletePosibility (Vector3 position)
-	{
-		List<Vector3> newList = new List<Vector3>(gridPositions);
-		int index = 0;
-		foreach(Vector3 element in newList){
-			if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
-				gridPositions.RemoveAt (index);
-			}
+	    void deletePosibility (Vector3 position)
+	    {
+		    List<Vector3> newList = new List<Vector3>(gridPositions);
+		    int index = 0;
+		    foreach(Vector3 element in newList){
+			    if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
+				    gridPositions.RemoveAt (index);
+                    index--;
+			    }
 
-			index++;
-		}
-	}
+			    index++;
+		    }
+	    }
 		
 		
 		//LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
