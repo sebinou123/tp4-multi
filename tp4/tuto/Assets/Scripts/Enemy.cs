@@ -29,7 +29,7 @@ using System.Collections;
             level = GameManager.instance.level;
             hp = Mathf.Ceil(2*Mathf.Exp(0.2f*level));
             playerDamage = Mathf.Ceil(0.2f*Mathf.Exp(0.2f*level));
-			
+            base.moveTime = 0.4f;
 			//Call the start function of our base class MovingObject.
 			base.Start ();
 		}

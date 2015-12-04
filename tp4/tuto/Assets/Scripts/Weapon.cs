@@ -4,7 +4,6 @@ using UnityEngine;
 public abstract class Weapon {
     private int[,] weaponRange;
     private float damageFactor;
-    private string weaponImage;
     private string weaponName;
 
     private float damage;

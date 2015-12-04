@@ -13,8 +13,8 @@ public class WeaponManager
         weaponsAvailable = new Weapon[WeaponManager.WEAPONS_AVAILABLE];
 
         weaponsAvailable[0] = new BasicSword(1);
-        weaponsAvailable[1] = new SwordOfTruth(0);
-        weaponsAvailable[2] = new KnightSword(0);
+        weaponsAvailable[1] = new SwordOfTruth(1);
+        weaponsAvailable[2] = new KnightSword(1);
         weaponsAvailable[3] = new WhirlwindAxe(1);
         weaponIndex = 0;
         currentWeapon = weaponsAvailable[weaponIndex];
