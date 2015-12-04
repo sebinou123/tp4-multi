@@ -37,6 +37,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		public GameObject[] lavaTile;
 		public GameObject[] exitDecorBack;
 		public GameObject[] exitDecorFront;
+		private List <Vector3> exitPosition = new List<Vector3> ();
 
 		
 		private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
@@ -108,6 +109,21 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			return randomPosition;
 		}
 
+	Boolean positionRestricted (Vector3 position)
+	{
+		bool goodRestricted = false;
+		int index = 0;
+		foreach(Vector3 element in exitPosition){
+			if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
+				goodRestricted = true;
+			}
+			
+			index++;
+		}
+
+		return goodRestricted;
+	}
+
 	void deletePosibility (Vector3 position)
 	{
 		List<Vector3> newList = new List<Vector3>(gridPositions);
@@ -146,7 +162,8 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 	void LayoutExitLayout(GameObject[] tileArrayBack,GameObject[] tileArrayFront, int x, int y)
 	{
-
+		float xPosition = 0;
+		float yPosition = 0;
 		GameObject tileChoiceBack = tileArrayBack[Random.Range (0, tileArrayBack.Length)];
 		GameObject tileChoiceFront = tileArrayFront[Random.Range (0, tileArrayFront.Length)];
 
@@ -166,6 +183,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		Vector3 positionFirstColumns = new Vector3 (x, y, 0);
 
 		for (int k = 0; k <= 2; k++) {
+			exitPosition.Add (positionFirstColumns);
 			Instantiate(tileChoiceBack, positionFirstColumns, Quaternion.identity);
 			deletePosibility(positionFirstColumns);
 			positionFirstColumns.x +=1;
@@ -175,18 +193,32 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 		for (int l = 0; l <= 2; l++) {
 			if(l != 1){
+			exitPosition.Add (positionSecondColumns);
 			Instantiate(tileChoiceFront, positionSecondColumns, Quaternion.identity);
 			deletePosibility(positionSecondColumns);
 			}
 			else{
-				float xPosition = positionSecondColumns.x;
-				float yPosition = positionSecondColumns.y;
+				exitPosition.Add (positionSecondColumns);
+				xPosition = positionSecondColumns.x;
+				yPosition = positionSecondColumns.y;
 				Instantiate (exit, positionSecondColumns, Quaternion.identity);
 				deletePosibility(positionSecondColumns);
 			}
 			positionSecondColumns.x +=1;
 
-
+			Vector3 blockingExit = new Vector3(xPosition - 1, yPosition - 1, 0);
+			deletePosibility(blockingExit);
+			blockingExit.x += 1;
+			deletePosibility(blockingExit);
+			blockingExit.x += 1;
+			deletePosibility(blockingExit);
+			blockingExit.x -= 1;
+			blockingExit.y -= 1;
+			deletePosibility(blockingExit);
+			blockingExit.y -= 1;
+			deletePosibility(blockingExit);
+			blockingExit.y += 1;
+			deletePosibility(blockingExit);
 		}
 
 
@@ -233,68 +265,83 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 							if(randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns )
 							{
 								randomPosition.x +=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
-					
+								if(positionRestricted(randomPosition) != true){
+									Instantiate(tileChoice, randomPosition, Quaternion.identity);
+									deletePosibility(randomPosition);
+								}
 							}
 						}else if(randomNumber == 1){
 							if(randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns )
 							{
+							  if(positionRestricted(randomPosition) != true){
 								randomPosition.x -=1;
 								Instantiate(tileChoice, randomPosition, Quaternion.identity);
 								deletePosibility(randomPosition);
+								}
 							}
 
 						}else if(randomNumber == 2){
 							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows )
 							{
-								randomPosition.y +=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
+								if(positionRestricted(randomPosition) != true){
+										randomPosition.y +=1;
+										Instantiate(tileChoice, randomPosition, Quaternion.identity);
+										deletePosibility(randomPosition);
+								}
 							}
 
 						}else if(randomNumber == 3){
 							if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows )
 							{
-								randomPosition.y -=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
+								if(positionRestricted(randomPosition) != true){
+										randomPosition.y -=1;
+										Instantiate(tileChoice, randomPosition, Quaternion.identity);
+										deletePosibility(randomPosition);
+								}
 							}
 
 						}else if(randomNumber == 4){
 					if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows && randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns)
 							{
-								randomPosition.x -=1;
-								randomPosition.y -=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
+								if(positionRestricted(randomPosition) != true){
+										randomPosition.x -=1;
+										randomPosition.y -=1;
+										Instantiate(tileChoice, randomPosition, Quaternion.identity);
+										deletePosibility(randomPosition);
+								}
 							}
 							
 						}else if(randomNumber == 5){
 						if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows && randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns)
 							{
-								randomPosition.x +=1;
-								randomPosition.y -=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
+								if(positionRestricted(randomPosition) != true){	
+									randomPosition.x +=1;
+									randomPosition.y -=1;
+									Instantiate(tileChoice, randomPosition, Quaternion.identity);
+									deletePosibility(randomPosition);
+								}		
 							}
 							
 						}else if(randomNumber == 6){
 							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows && randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns)
 							{
-								randomPosition.x +=1;
-								randomPosition.y +=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
+								if(positionRestricted(randomPosition) != true){	
+									randomPosition.x +=1;
+									randomPosition.y +=1;
+									Instantiate(tileChoice, randomPosition, Quaternion.identity);
+									deletePosibility(randomPosition);
+								}			
 							}
 							
 						}else if(randomNumber == 7){
 							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows && randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns)
 							{
-								randomPosition.x -=1;
-								randomPosition.y +=1;
-								Instantiate(tileChoice, randomPosition, Quaternion.identity);
-								deletePosibility(randomPosition);
+								if(positionRestricted(randomPosition) != true){
+									randomPosition.x -=1;
+									randomPosition.y +=1;
+									Instantiate(tileChoice, randomPosition, Quaternion.identity);
+									deletePosibility(randomPosition);
+								}
 							}
 							
 						}
