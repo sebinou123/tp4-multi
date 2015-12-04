@@ -35,6 +35,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		public int lavaCount = 6;
 		public int lavaspot = 8;
 		public GameObject[] lavaTile;
+		public GameObject[] exitDecorBack;
+		public GameObject[] exitDecorFront;
+
 		
 		private Transform boardHolder;									//A variable to store a reference to the transform of our Board object.
 		private List <Vector3> gridPositions = new List <Vector3> ();	//A list of possible locations to place tiles.
@@ -105,19 +108,18 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			return randomPosition;
 		}
 
-	    void deletePosibility (Vector3 position)
-	    {
-		    List<Vector3> newList = new List<Vector3>(gridPositions);
-		    int index = 0;
-		    foreach(Vector3 element in newList){
-			    if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
-				    gridPositions.RemoveAt (index);
-                    index--;
-			    }
+	void deletePosibility (Vector3 position)
+	{
+		List<Vector3> newList = new List<Vector3>(gridPositions);
+		int index = 0;
+		foreach(Vector3 element in newList){
+			if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
+				gridPositions.RemoveAt (index);
+			}
 
-			    index++;
-		    }
-	    }
+			index++;
+		}
+	}
 		
 		
 		//LayoutObjectAtRandom accepts an array of game objects to choose from along with a minimum and maximum range for the number of objects to create.
@@ -141,6 +143,56 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 
 		}
+
+	void LayoutExitLayout(GameObject[] tileArrayBack,GameObject[] tileArrayFront, int x, int y)
+	{
+
+		GameObject tileChoiceBack = tileArrayBack[Random.Range (0, tileArrayBack.Length)];
+		GameObject tileChoiceFront = tileArrayFront[Random.Range (0, tileArrayFront.Length)];
+
+		if (y >= rows) {
+			y = rows - 2;
+		}
+		if (y < 0) {
+			y = 2;
+		}
+		if (x >= columns) {
+			x = columns - 3;
+		}
+		if (x < 0) {
+			x = 1;
+		}
+
+		Vector3 positionFirstColumns = new Vector3 (x, y, 0);
+
+		for (int k = 0; k <= 2; k++) {
+			Instantiate(tileChoiceBack, positionFirstColumns, Quaternion.identity);
+			deletePosibility(positionFirstColumns);
+			positionFirstColumns.x +=1;
+		}
+
+		Vector3 positionSecondColumns = new Vector3(x,y-1,0);
+
+		for (int l = 0; l <= 2; l++) {
+			if(l != 1){
+			Instantiate(tileChoiceFront, positionSecondColumns, Quaternion.identity);
+			deletePosibility(positionSecondColumns);
+			}
+			else{
+				float xPosition = positionSecondColumns.x;
+				float yPosition = positionSecondColumns.y;
+				Instantiate (exit, positionSecondColumns, Quaternion.identity);
+				deletePosibility(positionSecondColumns);
+			}
+			positionSecondColumns.x +=1;
+
+
+		}
+
+
+
+
+	}
 
 	void LayoutLava(GameObject[] tileArray, int numberspot, int numbertylelava)
 	{
@@ -263,6 +315,10 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			
 			//Reset our list of gridpositions.
 			InitialiseList ();
+
+			//Instantiate the exit tile in the upper right hand corner of our game board
+			LayoutExitLayout (exitDecorBack,exitDecorFront, Random.Range (8, columns - 3), Random.Range (8, rows - 2));
+			
 			
 			LayoutLava(lavaTile, lavaspot, lavaCount);
 			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
@@ -274,8 +330,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 			
-			//Instantiate the exit tile in the upper right hand corner of our game board
-			Instantiate (exit, new Vector3 (5, 5, 0f), Quaternion.identity);
+
 		}
 
 

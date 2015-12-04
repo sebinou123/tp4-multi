@@ -1,13 +1,12 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\BoardManager.cs">
     <Files>
+      <File FileName="Assets\Scripts\Player.cs" Line="151" Column="52" />
+      <File FileName="Assets\Scripts\BoardManager.cs" Line="167" Column="3" />
       <File FileName="Assets\Scripts\GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\BoardManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Player.cs" Line="51" Column="24" />
-      <File FileName="Assets\Scripts\btnStartGame.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\btnStartGame.cs" Line="8" Column="18" />
       <File FileName="Assets\Scripts\SmoothCamera2D.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\btnCreateHero.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\RadioButton.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\WeaponManager.cs" Line="1" Column="1" />
     </Files>
