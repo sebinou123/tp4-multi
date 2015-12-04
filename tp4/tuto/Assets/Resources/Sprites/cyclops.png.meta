@@ -1,0 +1,661 @@
+fileFormatVersion: 2
+guid: 322c81745ba81014c84215801d494ee9
+timeCreated: 1449247365
+licenseType: Pro
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: cyclops_0
+    21300002: cyclops_1
+    21300004: cyclops_2
+    21300006: cyclops_3
+    21300008: cyclops_4
+    21300010: cyclops_5
+    21300012: cyclops_6
+    21300014: cyclops_7
+    21300016: cyclops_8
+    21300018: cyclops_9
+    21300020: cyclops_10
+    21300022: cyclops_11
+    21300024: cyclops_12
+    21300026: cyclops_13
+    21300028: cyclops_14
+    21300030: cyclops_15
+    21300032: cyclops_16
+    21300034: cyclops_17
+    21300036: cyclops_18
+    21300038: cyclops_19
+    21300040: cyclops_20
+    21300042: cyclops_21
+    21300044: cyclops_22
+    21300046: cyclops_23
+    21300048: cyclops_24
+    21300050: cyclops_25
+    21300052: cyclops_26
+    21300054: cyclops_27
+    21300056: cyclops_28
+    21300058: cyclops_29
+    21300060: cyclops_30
+    21300062: cyclops_31
+    21300064: cyclops_32
+    21300066: cyclops_33
+    21300068: cyclops_34
+    21300070: cyclops_35
+    21300072: cyclops_36
+    21300074: cyclops_37
+    21300076: cyclops_38
+    21300078: cyclops_39
+    21300080: cyclops_40
+    21300082: cyclops_41
+    21300084: cyclops_42
+    21300086: cyclops_43
+    21300088: cyclops_44
+    21300090: cyclops_45
+    21300092: cyclops_46
+    21300094: cyclops_47
+    21300096: cyclops_48
+    21300098: cyclops_49
+    21300100: cyclops_50
+    21300102: cyclops_51
+    21300104: cyclops_52
+    21300106: cyclops_53
+    21300108: cyclops_54
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: cyclops_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_1
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_2
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_3
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_4
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_5
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_6
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_7
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_8
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_9
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 400
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_11
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_12
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_13
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_14
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_15
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_16
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_17
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_18
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_19
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 320
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_21
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_22
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_23
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_24
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_25
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_26
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_27
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_28
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_29
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 240
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_31
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_32
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_33
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_34
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_35
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_36
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_37
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_38
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_39
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 160
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_41
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_42
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_43
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_44
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_45
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_46
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_47
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_48
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_49
+      rect:
+        serializedVersion: 2
+        x: 630
+        y: 80
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_51
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 0
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_52
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 0
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_53
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 0
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: cyclops_54
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 0
+        width: 70
+        height: 80
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

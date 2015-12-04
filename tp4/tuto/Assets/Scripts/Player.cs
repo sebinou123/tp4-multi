@@ -14,13 +14,12 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		public AudioClip moveSound1;				//1 of 2 Audio clips to play when player moves.
 		public AudioClip moveSound2;				//2 of 2 Audio clips to play when player moves.
 		public AudioClip gameOverSound;				//Audio clip to play when player dies.
-
 		
 		private Animator animator;					//Used to store a reference to the Player's animator component.
 
         public int maxHp = 300;
-        public int armor;
         public float experience;
+        public float maxExperience;
         public WeaponManager weaponManager;
 
         private bool weaponBeingSwapped = false;
@@ -55,8 +54,8 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		protected override void Start ()
 		{
             this.experience = 0;
+            this.maxExperience = 50 * Mathf.Exp(0.1f * level);
             this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
-            this.armor = this.level * 2;
             this.hp = this.maxHp;
 			//Get a component reference to the Player's animator component
 			animator = GetComponent<Animator>();
@@ -138,14 +137,13 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
             GameManager.instance.TextLevel.text = "" + this.level;
-            GameManager.instance.TextArmor.text = "" + this.armor;
             GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
             updateWeaponRange();
         }
 
         public override float onHit(float damageDealt)
         {
-            base.onHit(damageDealt-this.armor);
+            base.onHit(damageDealt);
             return 0;
         }
 
@@ -206,8 +204,8 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             {
                 this.level++;
                 this.experience = 0;
+                this.maxExperience = 50 * Mathf.Exp(0.1f * level);
                 this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
-                this.armor = this.level*2;
                 this.hp = this.maxHp;
             }
         }

@@ -8,8 +8,6 @@ using System.Collections;
 	public class GameManager : MonoBehaviour
 	{
         private const float aggroRange = 10f;
-		public float levelStartDelay = 2f;						//Time to wait before starting level, in seconds.
-		public float turnDelay = 0.5f;							//Delay between each Player turn.
 		public static GameManager instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
 		public Sprite[] items = new Sprite[4];
 
@@ -24,16 +22,14 @@ using System.Collections;
 		public GameObject createplayer;
         public Text TextName;
         public Text TextStats;
-        public Text TextArmor;
         public Text TextLevel;
         public Text TextWeapon;
         public GameObject[,] weaponRange;
         public Image ImageWeapon;
         private BoardManager boardScript;						//Store a reference to our BoardManager which will set up the level.
-		public int level = 1;									//Current level number, expressed in game as "Day 1".
+		public int level = 1;									
 		public List<Enemy> enemies;							//List of all Enemy units, used to issue them move commands.
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
-		private bool doingSetup = true;							//Boolean to check if we're setting up board, prevent Player from moving during setup.
 		private bool playerInstanciate = true;	
 		
 		
@@ -86,9 +82,7 @@ using System.Collections;
 		public void InitGame()
 		{
             level = player != null ? player.GetComponent<Player>().getLevel() : 1;
-			//While doingSetup is true the player can't move, prevent player from moving while title card is up.
-			doingSetup = true;
-			
+
 			//Get a reference to our image LevelImage by finding it by name.
 			levelImage = (GameObject)Instantiate(Resources.Load("Prefabs/Canvas"));
 			levelImage.name = "Canvas";
@@ -97,21 +91,15 @@ using System.Collections;
 			
 			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
 			levelText = GameObject.Find("LevelText").GetComponent<Text>();
-
-
-            //Set the text of levelText to the string "Day" and append the current level number.
-            levelText.text = "Day " + level;
+            Invoke("HideLevelImage", 0.1f);
 			
 			//Set levelImage to active blocking player's view of the game board during setup.
 			levelImage.SetActive(true);
-			//Call the HideLevelImage function with a delay in seconds of levelStartDelay.
-			Invoke("HideLevelImage", levelStartDelay);
 			infoplayer.SetActive (true);
 
 
 			TextName = GameObject.Find("TextName").GetComponent<Text>();
 			TextStats = GameObject.Find("TextStats").GetComponent<Text>();
-			TextArmor = GameObject.Find("TextArmor").GetComponent<Text>();
 			TextLevel = GameObject.Find("TextLevel").GetComponent<Text>();
 			TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
 			ImageWeapon = GameObject.Find("ImageWeapon").GetComponent<Image>();
@@ -143,23 +131,17 @@ using System.Collections;
 			//Call the SetupScene function of the BoardManager script, pass it current level number.
 			boardScript.SetupScene(level);
 		}
-		
-		
-		//Hides black image used between levels
-		void HideLevelImage()
-		{
-			levelBackGround = GameObject.Find ("LevelImage");
-			//Disable the levelImage gameObject.
-			levelBackGround.SetActive (false);
-			//Set doingSetup to false allowing player to move again.
-			doingSetup = false;
-		}
+
+        public void HideLevelImage()
+        {
+            GameObject.Find("LevelImage").SetActive(false);
+        }
 		
 		//Update is called every frame.
 		void Update()
 		{
 			//Start moving enemies.
-            if(!enemiesMoving && !doingSetup)
+            if(!enemiesMoving)
 			    StartCoroutine (MoveEnemies ());
 		}
 		
@@ -174,12 +156,6 @@ using System.Collections;
 		//GameOver is called when the player reaches 0 food points
 		public void GameOver()
 		{
-			//Set levelText to display number of levels passed and game over message
-			levelText.text = "After " + level + " days, you starved.";
-			
-			//Enable black background image gameObject.
-			levelImage.SetActive(true);
-			
 			//Disable this GameManager.
 			enabled = false;
 		}
@@ -187,18 +163,8 @@ using System.Collections;
 		//Coroutine to move enemies in sequence.
 		IEnumerator MoveEnemies()
 		{
-			//While enemiesMoving is true player is unable to move.
 			enemiesMoving = true;
-			
-			//Wait for turnDelay seconds, defaults to .1 (100 ms).
-			yield return new WaitForSeconds(turnDelay);
-			
-			//If there are no enemies spawned (IE in first level):
-			if (enemies.Count == 0) 
-			{
-				//Wait for turnDelay seconds between moves, replaces delay caused by enemies moving when there are none.
-				yield return new WaitForSeconds(turnDelay);
-			}
+			yield return new WaitForSeconds(0.1f);
 			
 			//Loop through List of Enemy objects.
 			for (int i = 0; i < enemies.Count; i++)
