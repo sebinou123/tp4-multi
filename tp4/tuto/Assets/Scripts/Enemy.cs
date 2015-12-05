@@ -57,12 +57,31 @@ using System.Collections;
 			if(Mathf.Abs (target.position.x - transform.position.x) < float.Epsilon)
 				
 				//If the y coordinate of the target's (player) position is greater than the y coordinate of this enemy's position set y direction 1 (to move up). If not, set it to -1 (to move down).
-				yDir = target.position.y > transform.position.y ? 1 : -1;
+			if(target.position.y > transform.position.y)
+			{
+				yDir = 1;
+				animator.SetInteger ("Direction", 0);
+				animator.SetTrigger ("MovingUp");
+			}else{
+				yDir = -1;
+				animator.SetInteger ("Direction", 1);
+				animator.SetTrigger ("MovingDown");
+			}
+			
 			
 			//If the difference in positions is not approximately zero (Epsilon) do the following:
 			else
 				//Check if target x position is greater than enemy's x position, if so set x direction to 1 (move right), if not set to -1 (move left).
-				xDir = target.position.x > transform.position.x ? 1 : -1;
+				if(target.position.x > transform.position.x)
+				{
+					xDir = 1;
+					animator.SetInteger ("Direction", 3);
+					animator.SetTrigger ("MovingRight");
+				}else{
+					xDir = -1;
+					animator.SetInteger ("Direction", 2);
+					animator.SetTrigger ("MovingLeft");
+				}
 			
 			//Call the AttemptMove function and pass in the generic parameter Player, because Enemy is moving and expecting to potentially encounter a Player
 			AttemptMove <Player> (xDir, yDir);
@@ -80,7 +99,16 @@ using System.Collections;
 			hitPlayer.onHit(playerDamage);
 			
 			//Set the attack trigger of animator to trigger Enemy attack animation.
-			animator.SetTrigger ("enemyAttack");
+		if(hitPlayer.transform.position.x == this.transform.position.x - 1){
+			animator.SetTrigger ("AttackLeft");
+		}if(hitPlayer.transform.position.x == this.transform.position.x + 1){
+			animator.SetTrigger ("AttackRight");
+		}if(hitPlayer.transform.position.y == this.transform.position.y - 1){
+			animator.SetTrigger ("AttackDown");
+		}else{
+			animator.SetTrigger ("AttackUp");
+		}
+
 			
 			//Call the RandomizeSfx function of SoundManager passing in the two audio clips to choose randomly between.
 			SoundManager.instance.RandomizeSfx (attackSound1, attackSound2);

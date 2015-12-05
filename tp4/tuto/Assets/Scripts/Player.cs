@@ -80,26 +80,42 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 weaponBeingSwapped = true;
                 StartCoroutine(swapWeapon(true));
             }else if(Input.GetKey(KeyCode.UpArrow)){
+				animator.SetInteger("Direction", 0);
                 facing = FacingDirection.Up;
                 updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.RightArrow))
             {
+				animator.SetInteger("Direction", 3);
                 facing = FacingDirection.Right;
                 updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.DownArrow))
             {
+			animator.SetInteger("Direction", 1);
                 facing = FacingDirection.Down;
                 updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.LeftArrow))
             {
+			animator.SetInteger("Direction", 2);
                 facing = FacingDirection.Left;
                 updateInfosPlayer();
             }
             else if (Input.GetKey(KeyCode.Space) && !attacking)
             {
+				if(facing == FacingDirection.Up) {
+					animator.SetTrigger ("WarriorAttackUp");
+				}
+				else if(facing == FacingDirection.Down) {
+					animator.SetTrigger ("WarriorAttackDown");
+				}
+				else if(facing == FacingDirection.Right) {
+					animator.SetTrigger ("WarriorAttackRight");
+				}
+				else {
+					animator.SetTrigger ("WarriorAttackLeft");
+				}
                 attacking = true;
                 StartCoroutine(attackRoutine());
             }
@@ -215,9 +231,23 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		{			
 			//Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
 			base.AttemptMove <T> (xDir, yDir);
-			
 			//Hit allows us to reference the result of the Linecast done in Move.
 			RaycastHit2D hit;
+
+			if(facing == FacingDirection.Up) {
+				animator.SetTrigger ("MovingUp");
+			}
+			else if(facing == FacingDirection.Down) {
+				animator.SetTrigger ("MovingDown");
+			}
+			else if(facing == FacingDirection.Right) {
+				animator.SetTrigger ("MovingRight");
+			}
+			else {
+				animator.SetTrigger ("MovingLeft");
+			}
+
+			SoundManager.instance.RandomizeSfx (moveSound1, moveSound2);
 			
 			//If Move returns true, meaning Player was able to move into an empty space.
 			if (Move (xDir, yDir, out hit)) 

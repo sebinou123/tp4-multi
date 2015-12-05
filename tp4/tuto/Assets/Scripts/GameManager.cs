@@ -114,7 +114,7 @@ using System.Collections;
             }
 
 		    if (playerInstanciate == true) {
-			    player = (GameObject)Instantiate (Resources.Load ("Prefabs/Player"));
+			    player = (GameObject)Instantiate (Resources.Load ("Prefabs/Warrior"));
 			    player.name = "Player";
 			    playerInstanciate = false;
 		    }

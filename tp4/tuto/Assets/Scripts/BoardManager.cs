@@ -26,7 +26,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		
 		public int columns = 8; 										//Number of columns in our game board.
 		public int rows = 8;											//Number of rows in our game board.
-		public Count decorCount = new Count(5,9);						//Lower and upper limit for our random number of food items per level.
+		public Count decorCount = new Count(5,14);						
 		public GameObject exit;											//Prefab to spawn for exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
 		public GameObject[] decorTiles;									//Array of food prefabs.
@@ -365,17 +365,22 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 			//Instantiate the exit tile in the upper right hand corner of our game board
 			LayoutExitLayout (exitDecorBack,exitDecorFront, Random.Range (8, columns - 3), Random.Range (8, rows - 2));
+
+
+			//Determine number of enemies based on current level number, based on a logarithmic progression
+			int enemyCount = 6;
+
+			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
+			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 			
 			
 			LayoutLava(lavaTile, lavaspot, lavaCount);
 			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (decorTiles, decorCount.minimum, decorCount.maximum);
 			
-			//Determine number of enemies based on current level number, based on a logarithmic progression
-			int enemyCount = 15;
+
+	
 			
-			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
 			
 
 		}
