@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//Class associate with the create hero button, when pressed, we instantiate the canva for the creation of hero
 public class btnCreateHero : MonoBehaviour {
 
 	public void create(){

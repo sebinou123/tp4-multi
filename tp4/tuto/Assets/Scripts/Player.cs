@@ -153,6 +153,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
             GameManager.instance.TextLevel.text = "" + this.level;
+			GameManager.instance.TextHp.text = "" + this.hp;
             GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
             updateWeaponRange();
         }
@@ -160,6 +161,9 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         public override float onHit(float damageDealt)
         {
             base.onHit(damageDealt);
+
+			//Check to see if game has ended.
+			CheckIfGameOver ();
             return 0;
         }
 
@@ -317,7 +321,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		private void CheckIfGameOver ()
 		{
 			//Check if food point total is less than or equal to zero.
-			if (false) 
+			if (this.hp <= 0) 
 			{
 				//Call the PlaySingle function of SoundManager and pass it the gameOverSound as the audio clip to play.
 				SoundManager.instance.PlaySingle (gameOverSound);

@@ -4,7 +4,9 @@ using System.Collections.Generic; 		//Allows us to use Lists.
 using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine random number generator.
 
 
-	
+	/**
+	 * Class who generate all the boardgame, its decoration, its outerwall, its floor, its lava, its exit.
+	 * */
 	public class BoardManager : MonoBehaviour
 	{
 		// Using Serializable allows us to embed a class with sub properties in the inspector.
@@ -26,17 +28,17 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		
 		public int columns = 8; 										//Number of columns in our game board.
 		public int rows = 8;											//Number of rows in our game board.
-		public Count decorCount = new Count(5,14);						
-		public GameObject exit;											//Prefab to spawn for exit.
+		public Count decorCount = new Count(5,14);						//Number of decoration with min and max		
+		public GameObject exit;											//Prefab to spawn exit.
 		public GameObject[] floorTiles;									//Array of floor prefabs.
-		public GameObject[] decorTiles;									//Array of food prefabs.
+		public GameObject[] decorTiles;									//Array of decor prefabs.
 		public GameObject[] enemyTiles;									//Array of enemy prefabs.
 		public GameObject[] outerWallTiles;								//Array of outer tile prefabs.
-		public int lavaCount = 6;
-		public int lavaspot = 8;
-		public GameObject[] lavaTile;
-		public GameObject[] exitDecorBack;
-		public GameObject[] exitDecorFront;
+		public int lavaCount = 6;										//Number of lava tiles
+		public int lavaspot = 8;										//Number of lava spot
+		public GameObject[] lavaTile;									//Array of lava tile prefabs.
+		public GameObject[] exitDecorBack;								//Array of back decoration prefabs.			
+		public GameObject[] exitDecorFront;								//Array of front decoration prefabs.
 		private List <Vector3> exitPosition = new List<Vector3> ();
 
 		
@@ -109,6 +111,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			return randomPosition;
 		}
 
+	//Represent the spot where the exit are in the game, this method check if the vector3 in parameter is in the same position of the exit tiles
 	Boolean positionRestricted (Vector3 position)
 	{
 		bool goodRestricted = false;
@@ -124,6 +127,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		return goodRestricted;
 	}
 
+	//Whit a vector3, check in the array of possible position the index of the position where they are almost the same (0.01 of difference max) and delete the possibility 
 	void deletePosibility (Vector3 position)
 	{
 		List<Vector3> newList = new List<Vector3>(gridPositions);
@@ -160,6 +164,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 		}
 
+	//generate the exit layout in the boardgame
 	void LayoutExitLayout(GameObject[] tileArrayBack,GameObject[] tileArrayFront, int x, int y)
 	{
 		float xPosition = 0;
@@ -167,6 +172,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		GameObject tileChoiceBack = tileArrayBack[Random.Range (0, tileArrayBack.Length)];
 		GameObject tileChoiceFront = tileArrayFront[Random.Range (0, tileArrayFront.Length)];
 
+		// we don't want the exit at the edge of the game, left, right, down or up
 		if (y >= rows) {
 			y = rows - 2;
 		}
@@ -180,8 +186,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			x = 1;
 		}
 
+		//make the top of the exit layout
 		Vector3 positionFirstColumns = new Vector3 (x, y, 0);
-
+		//instantiate decoration 
 		for (int k = 0; k <= 2; k++) {
 			exitPosition.Add (positionFirstColumns);
 			Instantiate(tileChoiceBack, positionFirstColumns, Quaternion.identity);
@@ -189,35 +196,36 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			positionFirstColumns.x +=1;
 		}
 
+		//make the bottom of the exit layout
 		Vector3 positionSecondColumns = new Vector3(x,y-1,0);
 
 		for (int l = 0; l <= 2; l++) {
+			//instantiate decoration 
 			if(l != 1){
 			exitPosition.Add (positionSecondColumns);
 			Instantiate(tileChoiceFront, positionSecondColumns, Quaternion.identity);
+			//delete posibility, we don't want an enemy or anything in the decoration tile
 			deletePosibility(positionSecondColumns);
 			}
+			//instantiate the exit to the next level who are between decoration
 			else{
 				exitPosition.Add (positionSecondColumns);
 				xPosition = positionSecondColumns.x;
 				yPosition = positionSecondColumns.y;
 				Instantiate (exit, positionSecondColumns, Quaternion.identity);
+				//delete posibility, we don't want an enemy or anything in the exit tile
 				deletePosibility(positionSecondColumns);
 			}
 			positionSecondColumns.x +=1;
 
+			//delete posibility near of the exit because we don't want to be blocked by lava or anything else
 			Vector3 blockingExit = new Vector3(xPosition - 1, yPosition - 1, 0);
 			deletePosibility(blockingExit);
-			blockingExit.x += 1;
-			deletePosibility(blockingExit);
-			blockingExit.x += 1;
-			deletePosibility(blockingExit);
-			blockingExit.x -= 1;
 			blockingExit.y -= 1;
 			deletePosibility(blockingExit);
 			blockingExit.y -= 1;
 			deletePosibility(blockingExit);
-			blockingExit.y += 1;
+			blockingExit.x += 1;
 			deletePosibility(blockingExit);
 		}
 
@@ -226,12 +234,15 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 	}
 
+	//layout random spot of lava
 	void LayoutLava(GameObject[] tileArray, int numberspot, int numbertylelava)
 	{
 		bool first = true;
 		bool goodNumber = false;
 		int randomNumber = 0;
 		int currentNumber = 0;
+			
+			//for the number of spot
 			for(int i = 0; i < numberspot; i++)
 			{
 			//Choose a position for randomPosition by getting a random position from our list of available Vector3s stored in gridPosition
@@ -241,15 +252,20 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
 			
 			//Instantiate tileChoice at the position returned by RandomPosition with no change in rotation
-			Instantiate(tileChoice, randomPosition, Quaternion.identity);
+			if(positionRestricted(randomPosition) != true){
+				Instantiate(tileChoice, randomPosition, Quaternion.identity);
+			}
 
+					//for the number of lava
 					for(int j = 0; (j < numbertylelava - 1); j++)
 					{	
+						//if first time generate the first random number and don't check if the previous number and the new number are the same
 						if(first == true){
 							randomNumber = Random.Range(0,8);
 							currentNumber = randomNumber;
 							first = false;
 						}else{
+						//do while the random number is not different of the precedent
 							do{
 								randomNumber = Random.Range(0,8);
 
@@ -260,11 +276,14 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 								}
 							}while(goodNumber != true);
 						}
-
+						
+						//for each random number, there is different position where the lava can be add to the game
 						if(randomNumber == 0){
+							//check if you are in the game, not in the outside
 							if(randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns )
 							{
 								randomPosition.x +=1;
+								//check if the lava is not in conflict with an other gameobject
 								if(positionRestricted(randomPosition) != true){
 									Instantiate(tileChoice, randomPosition, Quaternion.identity);
 									deletePosibility(randomPosition);
@@ -273,8 +292,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 1){
 							if(randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns )
 							{
-							  if(positionRestricted(randomPosition) != true){
+							 
 								randomPosition.x -=1;
+							if(positionRestricted(randomPosition) != true){
 								Instantiate(tileChoice, randomPosition, Quaternion.identity);
 								deletePosibility(randomPosition);
 								}
@@ -283,8 +303,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 2){
 							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows )
 							{
-								if(positionRestricted(randomPosition) != true){
+							
 										randomPosition.y +=1;
+								if(positionRestricted(randomPosition) != true){
 										Instantiate(tileChoice, randomPosition, Quaternion.identity);
 										deletePosibility(randomPosition);
 								}
@@ -293,8 +314,8 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 3){
 							if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows )
 							{
-								if(positionRestricted(randomPosition) != true){
 										randomPosition.y -=1;
+								if(positionRestricted(randomPosition) != true){
 										Instantiate(tileChoice, randomPosition, Quaternion.identity);
 										deletePosibility(randomPosition);
 								}
@@ -303,9 +324,10 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 4){
 					if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows && randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns)
 							{
-								if(positionRestricted(randomPosition) != true){
+								
 										randomPosition.x -=1;
 										randomPosition.y -=1;
+								if(positionRestricted(randomPosition) != true){
 										Instantiate(tileChoice, randomPosition, Quaternion.identity);
 										deletePosibility(randomPosition);
 								}
@@ -314,9 +336,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 5){
 						if(randomPosition.y - 1 > 0 && randomPosition.y - 1 < rows && randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns)
 							{
-								if(positionRestricted(randomPosition) != true){	
 									randomPosition.x +=1;
 									randomPosition.y -=1;
+							if(positionRestricted(randomPosition) != true){
 									Instantiate(tileChoice, randomPosition, Quaternion.identity);
 									deletePosibility(randomPosition);
 								}		
@@ -325,9 +347,10 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 6){
 							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows && randomPosition.x + 1 > 0 && randomPosition.x + 1 < columns)
 							{
-								if(positionRestricted(randomPosition) != true){	
+								
 									randomPosition.x +=1;
 									randomPosition.y +=1;
+								if(positionRestricted(randomPosition) != true){
 									Instantiate(tileChoice, randomPosition, Quaternion.identity);
 									deletePosibility(randomPosition);
 								}			
@@ -336,9 +359,9 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 						}else if(randomNumber == 7){
 							if(randomPosition.y + 1 > 0 && randomPosition.y + 1 < rows && randomPosition.x - 1 > 0 && randomPosition.x - 1 < columns)
 							{
-								if(positionRestricted(randomPosition) != true){
 									randomPosition.x -=1;
 									randomPosition.y +=1;
+								if(positionRestricted(randomPosition) != true){
 									Instantiate(tileChoice, randomPosition, Quaternion.identity);
 									deletePosibility(randomPosition);
 								}

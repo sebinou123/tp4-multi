@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//Class associate with the button startgame, when the button is pressed, we check if the player set his name and after, we can begin to instantiate alle the compent of the game
 public class btnStartGame : MonoBehaviour {
 
 	public static GameManager game;
