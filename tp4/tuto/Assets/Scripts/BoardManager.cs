@@ -385,9 +385,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			
 			//Reset our list of gridpositions.
 			InitialiseList ();
-
-			//Instantiate the exit tile in the upper right hand corner of our game board
-			LayoutExitLayout (exitDecorBack,exitDecorFront, Random.Range (8, columns - 3), Random.Range (8, rows - 2));
+		
 
 
 			//Determine number of enemies based on current level number, based on a logarithmic progression
@@ -398,8 +396,15 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 			
 			
 			LayoutLava(lavaTile, lavaspot, lavaCount);
+
+			//Instantiate the exit tile in the upper right hand corner of our game board
+			LayoutExitLayout (exitDecorBack,exitDecorFront, Random.Range (8, columns - 3), Random.Range (8, rows - 2));
 			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (decorTiles, decorCount.minimum, decorCount.maximum);
+
+			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
+			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
+
 			
 
 	

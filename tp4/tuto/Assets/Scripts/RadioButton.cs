@@ -5,12 +5,13 @@ using System.Collections;
 public class RadioButton : MonoBehaviour
 {
     static string[] options = new string[] { "Warrior", "Wizard"};
-    static Rect position = new Rect(448, 290, 200, 20);
     public int selected = 2;
 	private Image levelImage;	
 
     void OnGUI()
     {
+		RectTransform [] r = GameObject.Find("CanvasCreateHero(Clone)").GetComponents<RectTransform>();
+		Rect position = new Rect((r[0].rect.width/2)-100, r[0].rect.height/2, 200, 20);
         selected = GUI.SelectionGrid(position, selected, options, options.Length, GUI.skin.toggle);
 
     }
