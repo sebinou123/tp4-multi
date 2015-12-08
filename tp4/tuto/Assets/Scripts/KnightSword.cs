@@ -10,6 +10,7 @@ public class KnightSword : Weapon {
                                  {0, 0, 0, 0, 0}};
     private const float damageFactor = 1.5f;
     private const string weaponName = "Knight Sword";
+    private const int weaponLevel = 2;
 
     public KnightSword(int weaponLevel)
     {

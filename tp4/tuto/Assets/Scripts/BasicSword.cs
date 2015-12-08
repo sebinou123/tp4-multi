@@ -11,6 +11,7 @@ public class BasicSword : Weapon
                                  {0, 0, 0, 0, 0}};
     private const float damageFactor = 1f;
     private const string weaponName = "Basic Sword";
+    private const int weaponLevel = 0;
 
     public BasicSword(int weaponLevel)
     {

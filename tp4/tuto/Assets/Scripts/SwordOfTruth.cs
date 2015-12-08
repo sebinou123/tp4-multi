@@ -11,6 +11,7 @@ public class SwordOfTruth : Weapon {
                                  {0, 0, 0, 0, 0}};
     private const float damageFactor = 2.5f;
     private const string weaponName = "Sword of Truth";
+    private const int weaponLevel = 1;
 
     public SwordOfTruth(int weaponLevel)
     {

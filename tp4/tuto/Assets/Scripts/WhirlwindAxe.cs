@@ -10,6 +10,7 @@ public class WhirlwindAxe : Weapon {
                                  {0, 0, 0, 0, 0}};
     private const float damageFactor = 1.25f;
     private const string weaponName = "Whirlwind Axe";
+    private const int weaponImage = 3;
 
     public WhirlwindAxe(int weaponLevel)
     {

@@ -8,6 +8,16 @@ public abstract class Weapon {
 
     private float damage;
     private int weaponLevel;
+    private int weaponImage;
+    public int getWeaponImage()
+    {
+        return weaponImage;
+    }
+
+    public void setWeaponImage(int weaponImage)
+    {
+        this.weaponImage = weaponImage;
+    }
 
     public int getWeaponLevel()
     {
@@ -93,9 +103,9 @@ public abstract class Weapon {
     public static Weapon getWeaponDrop(int level)
     {
         Weapon returnValue = null;
-        System.Random rnd = new System.Random();
-        int randomType = rnd.Next(0,100);
-        int randomWeapon = rnd.Next(0,100);
+        int randomType = Random.Range(0, 100);
+        int randomWeapon = Random.Range(0, 100);
+        Debug.Log(randomType);
         if (randomType < 5)
         {
             returnValue = new SwordOfTruth(level);

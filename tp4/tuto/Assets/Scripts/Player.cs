@@ -54,7 +54,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		protected override void Start ()
 		{
             this.experience = 0;
-            this.maxExperience = 50 * Mathf.Exp(0.1f * level);
+            this.maxExperience = level*50 + 50;
             this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
             this.hp = this.maxHp;
 			//Get a component reference to the Player's animator component
@@ -153,7 +153,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             GameManager.instance.TextWeapon.text = weaponManager.getCurrentWeapon().getWeaponName();
             GameManager.instance.TextStats.text = weaponManager.getCurrentWeapon().ToString();
             GameManager.instance.TextLevel.text = "" + this.level;
-			GameManager.instance.TextHp.text = "" + this.hp;
+            GameManager.instance.TextHp.text = "" + this.hp + " / " + this.maxHp;
             GameManager.instance.ImageWeapon.sprite = GameManager.instance.items[weaponManager.getCurrentWeaponIndex()];
             updateWeaponRange();
         }
@@ -220,11 +220,10 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         public void gainExperience(float amount)
         {
             this.experience += amount;
-            if (experience >= 50 * Mathf.Exp(0.1f * level))
+            if (experience >= maxExperience)
             {
                 this.level++;
-                this.experience = 0;
-                this.maxExperience = 50 * Mathf.Exp(0.1f * level);
+                this.maxExperience = maxExperience + 50;
                 this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
                 this.hp = this.maxHp;
             }
@@ -262,20 +261,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 			
 			//Since the player has moved and lost food points, check if the game has ended.
 			CheckIfGameOver ();
-		}
-		
-		
-		//OnCantMove overrides the abstract function OnCantMove in MovingObject.
-		//It takes a generic parameter T which in the case of Player is a Wall which the player can attack and destroy.
-		protected override void OnCantMove <T> (T component)
-		{
-			//Set hitWall to equal the component passed in as a parameter.
-			Wall hitWall = component as Wall;
-			
-			//Set the attack trigger of the player's animation controller in order to play the player's attack animation.
-			animator.SetTrigger ("playerChop");
-		}
-		
+		}		
 		
 		//OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
 		private void OnTriggerEnter2D (Collider2D other)
@@ -293,27 +279,19 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 		
 		
 		//Restart reloads the scene when called.
-		private void Restart ()
-		{
-			//Load the last scene loaded, in this case Main, the only scene in the game.
-			Application.LoadLevel (Application.loadedLevel);
-		}
-		
-		
-		//LoseFood is called when an enemy attacks the player.
-		//It takes a parameter loss which specifies how many points to lose.
-		public void LoseFood (int loss)
-		{
-			//Set the trigger for the player animator to transition to the playerHit animation.
-			animator.SetTrigger ("playerHit");
-			
-			//Check to see if game has ended.
-			CheckIfGameOver ();
-		}
+        private void Restart()
+        {
+            //Load the last scene loaded, in this case Main, the only scene in the game.
+            Application.LoadLevel(Application.loadedLevel);
+        }
 
         public int getLevel()
         {
             return this.level;
+        }
+
+        protected override void OnCantMove<T>(T component)
+        {
         }
 		
 		

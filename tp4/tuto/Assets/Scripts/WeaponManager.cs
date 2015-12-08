@@ -13,9 +13,9 @@ public class WeaponManager
         weaponsAvailable = new Weapon[WeaponManager.WEAPONS_AVAILABLE];
 
         weaponsAvailable[0] = new BasicSword(1);
-        weaponsAvailable[1] = new SwordOfTruth(1);
-        weaponsAvailable[2] = new KnightSword(1);
-        weaponsAvailable[3] = new WhirlwindAxe(1);
+        weaponsAvailable[1] = new SwordOfTruth(0);
+        weaponsAvailable[2] = new KnightSword(0);
+        weaponsAvailable[3] = new WhirlwindAxe(0);
         weaponIndex = 0;
         currentWeapon = weaponsAvailable[weaponIndex];
     }
@@ -78,14 +78,17 @@ public class WeaponManager
         return returnWeapon;
     }
 
-    public void lootWeapon(int level)
+    public Weapon lootWeapon(int level)
     {
-        Weapon newWeapon = Weapon.getWeaponDrop(level);
+        Weapon newWeapon = null;
 
-        for(int i = 0; i < weaponsAvailable.Length; i++){
-            if (newWeapon.GetType() == weaponsAvailable[i].GetType())
-                weaponsAvailable[i] = newWeapon;
+        if (Random.Range(0, 2) == 1)
+        {
+            newWeapon = Weapon.getWeaponDrop(level);
+            weaponsAvailable[newWeapon.getWeaponImage()] = newWeapon;
         }
+
+        return newWeapon;
     }
 
     public int getCurrentWeaponIndex()

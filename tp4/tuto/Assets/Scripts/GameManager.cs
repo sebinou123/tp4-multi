@@ -15,9 +15,14 @@ using System.Collections;
 		public Sprite[] items = new Sprite[4];					//Sprite of all image weapon
 
 		public SmoothCamera2D camera;							//Instance of the camera
-		public bool firtTimeLoad = true;						//Indicate if its the first time loading the scene
+        public bool firtTimeLoad = true;						//Indicate if its the first time loading the scene
+        public bool firstFloor = true;						//Indicate if its the first time loading the scene
 		public GameObject player;								//Instance of player
-		public Text levelText;									//Text to display current level number.
+        public Text levelGained;									//Text to display the levels gained by the player.
+        public Text expGained;									//Text to display the exp gained by the player.
+        public Text weaponGainedName;									//Text to display the item name gained by the player.
+        public Text weaponGainedStats;									//Text to display stats of the item name gained by the player.
+        public Image weaponGained;									//Image to display the item image gained by the player.
         public GameObject levelImage;							//Image to block out level as levels are being set up, background for levelText.
 		public GameObject menuprincipal;						//Canva menuPrincipal
 		public GameObject infoplayer;							//Canva about the info of the player (level, weapon, etc)
@@ -33,9 +38,10 @@ using System.Collections;
 		public int level = 1;									//Level compteur	
 		public List<Enemy> enemies;								//List of all Enemy units, used to issue them move commands.
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
-		private bool playerInstanciate = true;	
-		
-		
+		private bool playerInstanciate = true;
+
+        private float initialEXP;
+        private int initialLVL;
 		
 		//Awake is always called before any Start functions
 		public void Awake()
@@ -62,12 +68,12 @@ using System.Collections;
 			boardScript = GetComponent<BoardManager>();
 	
 			//Call the InitGame function to initialize the first level 
-		    if (firtTimeLoad == false) {
+		    if (!firtTimeLoad) {
 			    InitGame();
 		    }
 
 			//Call the canva menuPrincipale for the first time loading the scene
-		    if (firtTimeLoad == true) {
+		    if (firtTimeLoad) {
 			    menuprincipal = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasMenuPrincipal")); 
 			    menuprincipal.SetActive (true);
 			    firtTimeLoad = false;
@@ -85,33 +91,31 @@ using System.Collections;
 		//Initializes the game for each level.
 		public void InitGame()
 		{
+            if (player != null)
+            {
+                player.GetComponent<Player>().hp = player.GetComponent<Player>().maxHp;
+            }
+            else
+            {
+                initialLVL = 1;
+                initialEXP = 0;
+            }
 			//get level of the player if player exist
-            level = player != null ? player.GetComponent<Player>().getLevel() : 1;
+            level = !firstFloor ? player.GetComponent<Player>().getLevel() : 1;
 
-			//Get a reference to our image LevelImage by finding it by name.
-			levelImage = (GameObject)Instantiate(Resources.Load("Prefabs/Canvas"));
-			levelImage.name = "Canvas";
-			infoplayer = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasInfoPlayer")); 
-
-			
-			//Get a reference to our text LevelText's text component by finding it by name and calling GetComponent.
-			levelText = GameObject.Find("LevelText").GetComponent<Text>();
-            Invoke("HideLevelImage", 0.1f);
-			
-			//Set levelImage to active blocking player's view of the game board during setup.
-			levelImage.SetActive(true);
-			infoplayer.SetActive (true);
+            infoplayer = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasInfoPlayer"));
+            infoplayer.SetActive(true);
 
 
-			//get all info in the canva infoplayer
-			TextName = GameObject.Find("TextName").GetComponent<Text>();
-			TextHp = GameObject.Find("TextHp").GetComponent<Text>();
-			TextStats = GameObject.Find("TextStats").GetComponent<Text>();
-			TextLevel = GameObject.Find("TextLevel").GetComponent<Text>();
-			TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
-			ImageWeapon = GameObject.Find("ImageWeapon").GetComponent<Image>();
+            //get all info in the canva infoplayer
+            TextName = GameObject.Find("TextName").GetComponent<Text>();
+            TextHp = GameObject.Find("TextHp").GetComponent<Text>();
+            TextStats = GameObject.Find("TextStats").GetComponent<Text>();
+            TextLevel = GameObject.Find("TextLevel").GetComponent<Text>();
+            TextWeapon = GameObject.Find("TextWeapon").GetComponent<Text>();
+            ImageWeapon = GameObject.Find("ImageWeapon").GetComponent<Image>();
 
-			//make the array of the range of the current weapon
+            //make the array of the range of the current weapon
             weaponRange = new GameObject[5, 5];
             for (int i = 0; i < 5; i++)
             {
@@ -121,29 +125,70 @@ using System.Collections;
                 }
             }
 
-			//if first time load, instantiate the player
-		    if (playerInstanciate == true) {
-			    player = (GameObject)Instantiate (Resources.Load ("Prefabs/Warrior"));
-			    player.name = "Player";
-			    playerInstanciate = false;
-		    }
+            //if first time load, instantiate the player
+            if (playerInstanciate == true)
+            {
+                player = (GameObject)Instantiate(Resources.Load("Prefabs/Warrior"));
+                player.name = "Player";
+                playerInstanciate = false;
+            }
 
-			//put the player in the beginning position
-			GameObject.Find ("Player").GetComponent<Player> ().enabled = true;
-			GameObject.Find ("Player").GetComponent<Player>().transform.position = new Vector3(0,0,0);
+            //put the player in the beginning position
+            GameObject.Find("Player").GetComponent<Player>().enabled = true;
+            GameObject.Find("Player").GetComponent<Player>().transform.position = new Vector3(0, 0, 0);
 
-			camera = GameObject.Find ("Main Camera").GetComponent<SmoothCamera2D>();
-			camera.target = player.transform;
-			
-			//Clear any Enemy objects in our List to prepare for next level.
-			enemies.Clear();
-			
-			//Call the SetupScene function of the BoardManager script, pass it current level number.
-			boardScript.SetupScene(level);
+            camera = GameObject.Find("Main Camera").GetComponent<SmoothCamera2D>();
+            camera.target = GameObject.Find("Player").GetComponent<Player>().transform;
+
+            //Clear any Enemy objects in our List to prepare for next level.
+            enemies.Clear();
+
+            if (!firstFloor)
+            {
+                //Get a reference to our image LevelImage by finding it by name.
+                levelImage = (GameObject)Instantiate(Resources.Load("Prefabs/Canvas"));
+                levelImage.name = "Canvas";
+                levelGained = GameObject.Find("LevelGained").GetComponent<Text>();
+
+                expGained = GameObject.Find("ExperienceGained").GetComponent<Text>();
+                weaponGainedName = GameObject.Find("ItemText").GetComponent<Text>();
+                weaponGained = GameObject.Find("Image").GetComponent<Image>();
+                weaponGainedStats = GameObject.Find("ItemGainedStats").GetComponent<Text>();
+                Weapon newWeapon = player.GetComponent<Player>().weaponManager.lootWeapon(player.GetComponent<Player>().getLevel());
+
+                levelGained.text = "+" + (player.GetComponent<Player>().level - initialLVL);
+                expGained.text = "+" + (player.GetComponent<Player>().experience - initialEXP);
+
+                if (newWeapon != null)
+                {
+                    weaponGained.enabled = true;
+                    weaponGained.sprite = items[newWeapon.getWeaponImage()];
+                    weaponGainedName.text = newWeapon.getWeaponName();
+                    weaponGainedStats.text = newWeapon.ToString();
+
+                }
+                else
+                {
+                    weaponGained.enabled = false;
+                    weaponGainedName.text = "";
+                    weaponGainedStats.text = "";
+                }
+                levelImage.SetActive(true);
+
+                initialLVL = player != null ? player.GetComponent<Player>().getLevel() : 1;
+                initialEXP = player != null ? player.GetComponent<Player>().experience : 0;
+            }
+            else
+            {
+                firstFloor = false;
+                onContinue();
+            }
+
+            //Call the SetupScene function of the BoardManager script, pass it current level number.
+            boardScript.SetupScene(level);
 		}
 
-		//hide the blackscreen when the loading is finish
-        public void HideLevelImage()
+        public void onContinue()
         {
             GameObject.Find("LevelImage").SetActive(false);
         }
