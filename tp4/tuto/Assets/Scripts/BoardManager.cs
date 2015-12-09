@@ -134,6 +134,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		int index = 0;
 		foreach(Vector3 element in newList){
 			if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
+				Debug.Log ("remove");
 				gridPositions.RemoveAt (index);
 			}
 
@@ -393,12 +394,12 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 
 			//Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
-			
-			
-			LayoutLava(lavaTile, lavaspot, lavaCount);
-
 			//Instantiate the exit tile in the upper right hand corner of our game board
 			LayoutExitLayout (exitDecorBack,exitDecorFront, Random.Range (8, columns - 3), Random.Range (8, rows - 2));
+
+
+			LayoutLava(lavaTile, lavaspot, lavaCount);
+		
 			//Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
 			LayoutObjectAtRandom (decorTiles, decorCount.minimum, decorCount.maximum);
 

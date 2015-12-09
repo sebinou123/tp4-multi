@@ -221,13 +221,22 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         {
             this.experience += amount;
             if (experience >= maxExperience)
-            {
+            {	
+				StartCoroutine(ShowMessage(2));
                 this.level++;
                 this.maxExperience = maxExperience + 50;
                 this.maxHp = 100 + (int)Mathf.Ceil(0.2f * Mathf.Exp(0.2f * level));
                 this.hp = this.maxHp;
             }
         }
+
+
+		IEnumerator ShowMessage (float delay) {
+			GameObject levelup = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasLevelUP")); 
+			levelup.SetActive (true);
+			yield return new WaitForSeconds(delay);
+			levelup.SetActive (false);
+		}
 		//AttemptMove overrides the AttemptMove function in the base class MovingObject
 		//AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
 		protected override void AttemptMove <T> (int xDir, int yDir)
