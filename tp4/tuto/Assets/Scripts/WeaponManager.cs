@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Class who show the array of weapon for the player, hava his current weapon and deal when he get new weapon or change his current weapon
+ * */
 public class WeaponManager
 {
-    public static int WEAPONS_AVAILABLE = 4;
-    public static Weapon[] weaponsAvailable;
-    private Weapon currentWeapon;
-    private int weaponIndex;
+    public static int WEAPONS_AVAILABLE = 4;	//max of 4 weapon in the weapon manager
+    public static Weapon[] weaponsAvailable;    //array of weapon 
+    private Weapon currentWeapon;				//the current weapon use by the player
+    private int weaponIndex;					//the current index of the weapon array
 
     public WeaponManager()
     {
@@ -33,11 +36,13 @@ public class WeaponManager
         currentWeapon = weaponsAvailable[weaponIndex];
     }
 
+	//return the weapon use by the player
     public Weapon getCurrentWeapon()
     {
         return this.currentWeapon;
     }
 
+	//method who return the next weapon in the array of weapon when the player decide to change
     public Weapon nextAvailable(bool switchWeapon)
     {
         Weapon returnWeapon;
@@ -58,6 +63,7 @@ public class WeaponManager
         return returnWeapon;
     }
 
+	//method who return the previous weapon in the array of weapon when the player decide to change
     public Weapon previousAvailable(bool switchWeapon)
     {
         Weapon returnWeapon;
@@ -78,6 +84,7 @@ public class WeaponManager
         return returnWeapon;
     }
 
+	//return if the player got a new weapon (50%)
     public Weapon lootWeapon(int level)
     {
         Weapon newWeapon = null;
@@ -91,6 +98,7 @@ public class WeaponManager
         return newWeapon;
     }
 
+	//get index of the current weapon use by the player
     public int getCurrentWeaponIndex()
     {
         return this.weaponIndex;

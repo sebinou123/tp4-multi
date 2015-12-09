@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+ * Class for the camera to move it to a specific target, who is our player
+ * */
 public class SmoothCamera2D : MonoBehaviour {
 
 	public float dampTime = 0.15f;
 	private Vector3 velocity = Vector3.zero;
 	public Transform target;
 	
-	// Update is called once per frame
+	// Update is called once per frame, update is position to the target
 	void Update () 
 	{
 		if (target)

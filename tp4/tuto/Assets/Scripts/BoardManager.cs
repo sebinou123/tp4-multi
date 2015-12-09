@@ -134,7 +134,7 @@ using Random = UnityEngine.Random; 		//Tells Random to use the Unity Engine rand
 		int index = 0;
 		foreach(Vector3 element in newList){
 			if( (element - position).sqrMagnitude <= (element * 0.01f).sqrMagnitude) {
-				Debug.Log ("remove");
+
 				gridPositions.RemoveAt (index);
 			}
 

@@ -2,6 +2,9 @@
 using System.Collections;
 
 
+	/*
+	 * Class who deal when the player attempt to move on a wall, who can be destroyed
+	 * */
 	public class Wall : MonoBehaviour
 	{
 		public AudioClip chopSound1;				//1 of 2 audio clips that play when the wall is attacked by the player.

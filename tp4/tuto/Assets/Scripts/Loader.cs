@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+	/**
+	 * Class who load our gamemanager and our soundmanager to start the game only if is not already instantiate
+	 * */
 	public class Loader : MonoBehaviour 
 	{
 		public GameObject gameManager;			//GameManager prefab to instantiate.

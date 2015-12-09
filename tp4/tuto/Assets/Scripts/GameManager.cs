@@ -40,8 +40,8 @@ using System.Collections;
 		private bool enemiesMoving;								//Boolean to check if enemies are moving.
 		private bool playerInstanciate = true;
 
-        private float initialEXP;
-        private int initialLVL;
+        private float initialEXP;								//experience in the beginning of the game
+		private int initialLVL;									//level in the beginning of the game
 		
 		//Awake is always called before any Start functions
 		public void Awake()
@@ -91,6 +91,7 @@ using System.Collections;
 		//Initializes the game for each level.
 		public void InitGame()
 		{
+			//set the hp at his max each time he begin a new level
             if (player != null)
             {
                 player.GetComponent<Player>().hp = player.GetComponent<Player>().maxHp;
@@ -150,6 +151,7 @@ using System.Collections;
                 levelImage.name = "Canvas";
                 levelGained = GameObject.Find("LevelGained").GetComponent<Text>();
 
+				//set value for the canva at each end of level who show if the player got a new weapon (50%)
                 expGained = GameObject.Find("ExperienceGained").GetComponent<Text>();
                 weaponGainedName = GameObject.Find("ItemText").GetComponent<Text>();
                 weaponGained = GameObject.Find("Image").GetComponent<Image>();
@@ -159,6 +161,7 @@ using System.Collections;
                 levelGained.text = "+" + (player.GetComponent<Player>().level - initialLVL);
                 expGained.text = "+" + (player.GetComponent<Player>().experience - initialEXP);
 
+				//if he got a new weapon
                 if (newWeapon != null)
                 {
                     weaponGained.enabled = true;
@@ -167,6 +170,7 @@ using System.Collections;
                     weaponGainedStats.text = newWeapon.ToString();
 
                 }
+				//or not
                 else
                 {
                     weaponGained.enabled = false;
@@ -187,7 +191,7 @@ using System.Collections;
             //Call the SetupScene function of the BoardManager script, pass it current level number.
             boardScript.SetupScene(level);
 		}
-
+		//stop showing the canva about the loot of the player
         public void onContinue()
         {
             GameObject.Find("LevelImage").SetActive(false);

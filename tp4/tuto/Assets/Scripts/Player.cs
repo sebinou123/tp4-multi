@@ -65,11 +65,13 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 
             weaponManager = new WeaponManager();
 
-            //GameManager.instance.TextWeapon.color = weaponManager.getCurrentWeapon().getWeaponRarity().color;
+    
 		}
 		
+		//call when an event is started
 		private void Update ()
 		{
+			//if q or e, change the current weapon
             if (!weaponBeingSwapped && Input.GetKey(KeyCode.Q))
             {
                 weaponBeingSwapped = true;
@@ -79,6 +81,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             {
                 weaponBeingSwapped = true;
                 StartCoroutine(swapWeapon(true));
+			//if its the arrows, change the facing of the player
             }else if(Input.GetKey(KeyCode.UpArrow)){
 				animator.SetInteger("Direction", 0);
                 facing = FacingDirection.Up;
@@ -102,6 +105,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 facing = FacingDirection.Left;
                 updateInfosPlayer();
             }
+			//if its spacebar, begin attack routine
             else if (Input.GetKey(KeyCode.Space) && !attacking)
             {
 				if(facing == FacingDirection.Up) {
@@ -119,6 +123,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                 attacking = true;
                 StartCoroutine(attackRoutine());
             }
+			//if its moving (a,s,d,w), try to move if its not a blocking layer
             if (!base.moving)
             {
                 int horizontal = 0;  	//Used to store the horizontal move direction.
@@ -147,6 +152,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             updateInfosPlayer();
 		}
 
+		//update all stats about the player
         private void updateInfosPlayer()
         {
             GameManager.instance.TextName.text = btnStartGame.name;
@@ -158,6 +164,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             updateWeaponRange();
         }
 
+		//when the player is attacked by an ennemy, he lose hp and we check if he died
         public override float onHit(float damageDealt)
         {
             base.onHit(damageDealt);
@@ -166,11 +173,13 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 			CheckIfGameOver ();
             return 0;
         }
-
+		
+		//call when the player attack, check if he did attack an ennemy and collect experience if he kill the ennemy
         IEnumerator attackRoutine()
         {
             int maxInt = 5;
             Vector2 playerPos = transform.position;
+			//get the range of the weapon with the good facing
             int[,] attackedBlocks = weaponManager.getCurrentWeapon().getWeaponRange(facing);
             for (int i = 0; i < maxInt; i++)
             {
@@ -180,6 +189,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
                     {
                         Vector2 attackedXY = new Vector2(playerPos.x + j - 2, playerPos.y - i + 2);
                         foreach(Enemy go in GameManager.instance.enemies){
+						//if he hit the ennemy, the enemy lose hp and gain experience if he's dead
                             if (go.transform.position.x == attackedXY.x && go.transform.position.y == attackedXY.y)
                             {
                                 this.gainExperience(go.onHit(weaponManager.getCurrentWeapon().getWeaponDamage()));
@@ -192,6 +202,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             attacking = false;
         }
 
+		//set what will be the previous and the next weapon of our current weapon
         IEnumerator swapWeapon(bool positiveSwap)
         {
             if (positiveSwap) { 
@@ -206,6 +217,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             weaponBeingSwapped = false;
         }
 
+		//update the image representation of the weapon range with the good facing
         private void updateWeaponRange()
         {
             for (int i = 0; i <= 4; i++)
@@ -217,6 +229,8 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
             }
         }
 
+		//player get experience and check if he gain a level, so he get his hp back and get more hp at heach level. Show for 2 second a message to the user to know that his
+		//hero gain a level
         public void gainExperience(float amount)
         {
             this.experience += amount;
@@ -231,6 +245,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
         }
 
 
+		//show the message level UP for a specific time (delay)
 		IEnumerator ShowMessage (float delay) {
 			GameObject levelup = (GameObject)Instantiate(Resources.Load("Prefabs/CanvasLevelUP")); 
 			levelup.SetActive (true);
@@ -246,6 +261,7 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 			//Hit allows us to reference the result of the Linecast done in Move.
 			RaycastHit2D hit;
 
+			//do the right animation of moving with the right facing
 			if(facing == FacingDirection.Up) {
 				animator.SetTrigger ("MovingUp");
 			}
@@ -320,6 +336,8 @@ using UnityEditor.VersionControl;	//Allows us to use UI.
 				GameManager.instance.GameOver ();
 			}
 		}
+
+		//enum of each possible facing direction
         public enum FacingDirection
         {
             Up, Right, Down, Left
