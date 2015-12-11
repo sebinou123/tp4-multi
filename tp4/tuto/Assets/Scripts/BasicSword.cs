@@ -2,7 +2,7 @@
 using System.Collections;
 
 /**
- * Class for the basic sword stats (range, name, damage, etc)
+ * Class for the basic sword stats (range, name, damage, etc).
  * */
 public class BasicSword : Weapon
 {
